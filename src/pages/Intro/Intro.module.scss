@@ -1,0 +1,5 @@
+@use "/src/assets/scss/variables" as mixin;
+
+.test {
+    background-color: mixin.$primaryColor;
+}
