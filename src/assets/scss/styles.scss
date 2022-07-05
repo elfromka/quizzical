@@ -1,0 +1,143 @@
+@import "/node_modules/normalize.css/normalize.css";
+@import "fonts";
+@import "variables";
+
+
+
+// General
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+::selection {
+    background-color: $primaryColor;
+    color: $lightColor;
+}
+
+// Typography
+html {
+    /* 62.5% of 16px = 10px */
+    font-size: 62.5%;
+}
+
+body {
+    font-family: $primaryFont;
+}
+
+// Elements
+.blob {
+    position: absolute;
+    height: 15rem;
+    width: 20rem;
+
+    &--top {
+        clip-path: polygon(61% 0, 82% 3%, 95% 13%, 100% 25%, 98% 64%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
+        top: -8rem;
+        right: 0;
+    }
+
+    &--bottom {
+        clip-path: polygon(61% 0, 82% 3%, 95% 13%, 100% 25%, 98% 64%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
+        left: -8rem;
+        bottom: 0;
+    }
+
+    &--yellow {
+        background-color: $rightTopBlobColor;
+    }
+
+    &--blue {
+        background-color: $leftBottomBlobColor;
+    }
+}
+
+.btn {
+    border: 0;
+    background: unset;
+    border-radius: 2rem;
+    transition: $transition-duration;
+    font-weight: 500;
+    display: inline-block;
+    text-decoration: none;
+
+    &--primary {
+        background-color: $btnBackgroundColor;
+        color: $backgroundColor;
+
+        &:hover {
+            background-color: darken($btnBackgroundColor, 10%);
+        }
+    }
+
+    &--outline {
+        border: 1px solid $primaryColor;
+    }
+
+    &--sm {
+        padding: 0.5rem 1.2rem;
+    }
+
+    &--xl {
+        padding: 2.03rem 7.2rem;
+        font-size: 1.6rem;
+    }
+}
+
+// Pages
+.container {
+    max-width: 768px;
+    z-index: 1;
+}
+
+.wrapper {
+    position: relative;
+    display: flex;
+    height: 100vh;
+
+    &--primary {
+        background-color: $backgroundColor;
+    }
+
+    &--centered {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+.intro {
+    &__title {
+        font-size: 3.2rem;
+        font-family: $secondaryFont;
+        margin-bottom: 0;
+        font-weight: bold;
+
+        &--dark-grey {
+            color: $introTitleColor;
+        }
+    }
+
+    &__subtitle {
+        font-size: 1.6rem;
+        margin-bottom: 3rem;
+        font-weight: 400;
+
+        &--primary {
+            color: $primaryColor;
+        }
+    }
+}
+
+.question {
+    &__title {
+        font-family: $secondaryFont;
+        font-size: 1.6rem;
+        font-weight: bold;
+
+        &--primary {
+            color: $primaryColor
+        }
+    }
+}
