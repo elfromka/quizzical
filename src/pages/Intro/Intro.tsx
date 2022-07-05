@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import styles from "./Intro.module.scss";
 
 const Intro = () => (
     <>
-        <p className={`${styles.test} red`}>Lorem.</p>
+        <p className="">Lorem.</p>
         Intro
         <Link to="/questions" />
     </>
