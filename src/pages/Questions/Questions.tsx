@@ -10,21 +10,28 @@ const Questions = () => {
     const [questions, setQuestions] = useState([]);
 
     useEffect(() => {
+        const abortController = new AbortController();
+
         const fetchData = async () => {
-            const fetchedQuestions = await fetchQuestions(5, Difficulty.EASY);
+            const fetchedQuestions = await fetchQuestions(
+                5,
+                Difficulty.EASY,
+                abortController
+            );
             setQuestions(fetchedQuestions);
         };
 
         fetchData();
+        setLoading(true);
 
-        setLoading(false);
+        // this will cancel the fetch request when the effect is unmounted
+        return () => abortController.abort();
     }, []);
 
     return (
         <>
             <div className="questions container">
-                {questions ? true : false}
-                {loading ? (
+                {loading && questions.length === 0 ? (
                     [...Array(NR_OF_QUESTIONS)].map((currentValue, i) => (
                         <Loader key={`${currentValue}-${i}`} />
                     ))
@@ -52,7 +59,10 @@ const Questions = () => {
                     </>
                 )}
             </div>
-            <button disabled={loading} className="btn btn--primary btn--md">
+            <button
+                disabled={loading && (questions.length === 0 ? true : false)}
+                className="btn btn--primary btn--md"
+            >
                 Check answers
             </button>
             {/* <Score score={2} totalQuestions={5} /> */}

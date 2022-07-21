@@ -10,16 +10,19 @@ export const NR_OF_QUESTIONS: number = 5;
 
 const fetchQuestions = async (
     amount: number = NR_OF_QUESTIONS,
-    difficulty: Difficulty
+    difficulty: Difficulty,
+    abortController: any
 ) => {
     // const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple&encode=base64`;
     const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple`;
 
     try {
-        const response = await fetch(endpoint);
+        const response = await fetch(endpoint, {
+            signal: abortController.signal,
+        });
 
         if (response.status !== 200) {
-            throw new Error("API failed to respond. Please, try again later!");
+            throw new Error("No response. Check the APIs' status.");
         }
 
         const data = await response.json();
@@ -31,10 +34,12 @@ const fetchQuestions = async (
                 question.correct_answer,
             ]),
         }));
-    } catch (error) {
-        console.error(error);
-
-        throw new Error("Failed to fetch questions from the API");
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(
+                `Failed on fetching questions. Message: ${error.message}`
+            );
+        }
     }
 };
 
