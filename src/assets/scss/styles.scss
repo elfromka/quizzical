@@ -147,6 +147,7 @@ body {
     }
 }
 
+// 1. Intro
 .intro {
     text-align: center;
 
@@ -172,6 +173,7 @@ body {
     }
 }
 
+// 2. Questions
 .question {
     &__title {
         font-family: $secondaryFont;
@@ -209,5 +211,31 @@ body {
     .score__title {
         font-size: 1.2rem;
         margin-right: 2.5rem;
+    }
+}
+
+// 3. Not Found
+.not-found {
+    text-align: center;
+
+    &__title {
+        font-size: 3.2rem;
+        font-family: $secondaryFont;
+        margin-bottom: 0;
+        font-weight: bold;
+
+        &--dark-grey {
+            color: $introTitleColor;
+        }
+    }
+
+    &__subtitle {
+        font-size: 1.6rem;
+        margin-bottom: 3rem;
+        font-weight: 400;
+
+        &--primary {
+            color: $primaryColor;
+        }
     }
 }
