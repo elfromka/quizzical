@@ -2,8 +2,6 @@
 @import "fonts";
 @import "variables";
 
-
-
 // General
 *,
 *::before,
@@ -61,6 +59,7 @@ body {
     font-weight: 500;
     display: inline-block;
     text-decoration: none;
+    cursor: pointer;
 
     &--primary {
         background-color: $btnBackgroundColor;
@@ -75,8 +74,48 @@ body {
         border: 1px solid $primaryColor;
     }
 
+    &--selected {
+        border: 1px solid $selectedAnswerColor;
+        background-color: $selectedAnswerColor;
+    }
+
+    &:disabled {
+        color: $primaryColor;
+        border-color: $btnBackgroundColor;
+        opacity: 0.5;
+        cursor: default;
+        color: $lightColor;
+    }
+
+    &--wrong {
+        border: 1px solid $wrongAnswerColor;
+        background-color: $wrongAnswerColor;
+        opacity: 0.5;
+
+        &:disabled {
+            border-color: $wrongAnswerColor
+        }
+    }
+
+    &--correct {
+        border: 1px solid $correctAnswerColor;
+        background-color: $correctAnswerColor;
+
+        &:disabled {
+            border-color: $correctAnswerColor;
+            opacity: 1;
+        }
+    }
+
     &--sm {
         padding: 0.5rem 1.2rem;
+        border-radius: .9rem;
+    }
+
+    &--md {
+        padding: 1.2rem 2.2rem;
+        font-size: 1.3rem;
+        border-radius: 1.1rem;
     }
 
     &--xl {
@@ -87,14 +126,16 @@ body {
 
 // Pages
 .container {
-    max-width: 768px;
+    max-width: 600px;
     z-index: 1;
 }
 
 .wrapper {
     position: relative;
     display: flex;
+    flex-direction: column;
     height: 100vh;
+    padding: 4rem;
 
     &--primary {
         background-color: $backgroundColor;
@@ -103,11 +144,12 @@ body {
     &--centered {
         justify-content: center;
         align-items: center;
-        text-align: center;
     }
 }
 
 .intro {
+    text-align: center;
+
     &__title {
         font-size: 3.2rem;
         font-family: $secondaryFont;
@@ -139,5 +181,33 @@ body {
         &--primary {
             color: $primaryColor
         }
+    }
+
+    &:last-child {
+        margin-bottom: 3rem;
+    }
+}
+
+.answers {
+    .btn {
+        margin-right: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.separator {
+    border: 0;
+    border-top: 1px solid $questionHRColor;
+    margin-top: 0;
+}
+
+.score {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+
+    .score__title {
+        font-size: 1.2rem;
+        margin-right: 2.5rem;
     }
 }
