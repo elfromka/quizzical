@@ -13,6 +13,7 @@ const fetchQuestions = async (
     difficulty: Difficulty,
     abortController: any
 ) => {
+    // TODO: make it work with base64 to not have issues with certain characters in the questions and in the answers as well
     // const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple&encode=base64`;
     const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple`;
 

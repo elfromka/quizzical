@@ -1,13 +1,20 @@
-// import { Question, Score } from "../../components/list";
 import { useEffect, useState } from "react";
+import { Question, Score, Loader } from "../../components/list";
 import fetchQuestions, { Difficulty, NR_OF_QUESTIONS } from "../../api/api";
-import { Question, Loader } from "../../components/list";
 
-// const checkAnswers = () => {};
+export enum TotalUserAnswersActions {
+    INCREMENT = "increment",
+    DECREMENT = "decrement",
+}
 
 const Questions = () => {
     const [loading, setLoading] = useState(true);
     const [questions, setQuestions] = useState([]);
+    const [totalUserAnswers, setTotalUserAnswers] = useState(0);
+    const [gameOver, setGameOver] = useState({
+        showScoreComponent: false,
+        showCheckButton: true,
+    });
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -28,8 +35,27 @@ const Questions = () => {
         return () => abortController.abort();
     }, []);
 
+    const handleTotalUserAnswers = (action: TotalUserAnswersActions) => {
+        if (action === "increment") {
+            setTotalUserAnswers((prev) => prev + 1);
+
+            return;
+        }
+
+        setTotalUserAnswers((prev) => prev - 1);
+    };
+
+    const handleCheckButtonClick = () => {
+        setGameOver((prev) => ({
+            ...prev,
+            showScoreComponent: !prev.showScoreComponent,
+            showCheckButton: !prev.showCheckButton,
+        }));
+    };
+
     return (
         <>
+            {console.log(totalUserAnswers)}
             <div className="questions container">
                 {loading && questions.length === 0 ? (
                     [...Array(NR_OF_QUESTIONS)].map((currentValue, i) => (
@@ -53,19 +79,30 @@ const Questions = () => {
                                     text={question}
                                     correct_answer={correct_answer}
                                     incorrect_answer={incorrect_answers}
+                                    handleTotalUserAnswers={
+                                        handleTotalUserAnswers
+                                    }
                                 />
                             )
                         )}
                     </>
                 )}
             </div>
-            <button
-                disabled={loading && (questions.length === 0 ? true : false)}
-                className="btn btn--primary btn--md"
-            >
-                Check answers
-            </button>
-            {/* <Score score={2} totalQuestions={5} /> */}
+            {gameOver.showCheckButton && (
+                <button
+                    disabled={
+                        (loading && (questions.length === 0 ? true : false)) ||
+                        totalUserAnswers < NR_OF_QUESTIONS
+                    }
+                    className="btn btn--primary btn--md"
+                    onClick={handleCheckButtonClick}
+                >
+                    Check answers
+                </button>
+            )}
+            {gameOver.showScoreComponent && (
+                <Score score={2} totalQuestions={5} />
+            )}
         </>
     );
 };

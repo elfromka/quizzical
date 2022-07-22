@@ -60,6 +60,7 @@ body {
     display: inline-block;
     text-decoration: none;
     cursor: pointer;
+    z-index: 1;
 
     &--primary {
         background-color: $btnBackgroundColor;

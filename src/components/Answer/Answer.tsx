@@ -23,7 +23,7 @@ const Answer = ({ text, selectAnswer, selectedCount }: Props) => {
                 applySelected && "btn--selected"
             }`}
             onClick={applySelectedClass}
-            value="Cabbage Patch Kids"
+            value={text}
         >
             {text}
         </button>
