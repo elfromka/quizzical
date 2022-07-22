@@ -11,6 +11,7 @@ const Questions = () => {
     const [loading, setLoading] = useState(true);
     const [questions, setQuestions] = useState([]);
     const [totalUserAnswers, setTotalUserAnswers] = useState(0);
+    const [score, setScore] = useState(0);
     const [gameOver, setGameOver] = useState({
         showScoreComponent: false,
         showCheckButton: true,
@@ -37,12 +38,16 @@ const Questions = () => {
 
     const handleTotalUserAnswers = (action: TotalUserAnswersActions) => {
         if (action === "increment") {
-            setTotalUserAnswers((prev) => prev + 1);
+            setTotalUserAnswers((prevNr) => prevNr + 1);
 
             return;
         }
 
-        setTotalUserAnswers((prev) => prev - 1);
+        setTotalUserAnswers((prevNr) => prevNr - 1);
+    };
+
+    const handleScore = () => {
+        setScore((prevScore) => prevScore + 1);
     };
 
     const handleCheckButtonClick = () => {
@@ -64,24 +69,17 @@ const Questions = () => {
                 ) : (
                     <>
                         {questions.map(
-                            (
-                                {
-                                    question,
-                                    answers,
-                                    correct_answer,
-                                    incorrect_answers,
-                                },
-                                index
-                            ) => (
+                            ({ question, answers, correct_answer }, index) => (
                                 <Question
                                     key={index}
                                     answers={answers}
                                     text={question}
                                     correct_answer={correct_answer}
-                                    incorrect_answer={incorrect_answers}
                                     handleTotalUserAnswers={
                                         handleTotalUserAnswers
                                     }
+                                    showScore={gameOver.showScoreComponent}
+                                    handleScore={handleScore}
                                 />
                             )
                         )}
@@ -101,7 +99,7 @@ const Questions = () => {
                 </button>
             )}
             {gameOver.showScoreComponent && (
-                <Score score={2} totalQuestions={5} />
+                <Score score={score} totalQuestions={NR_OF_QUESTIONS} />
             )}
         </>
     );

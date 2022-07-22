@@ -6,16 +6,18 @@ type Props = {
     text: string;
     answers: string[];
     correct_answer: string;
-    incorrect_answer: string[];
+    showScore: boolean;
     handleTotalUserAnswers: (action: TotalUserAnswersActions) => void;
+    handleScore: () => void;
 };
 
 const Question: React.FC<Props> = ({
     text,
     answers,
-    // correct_answer,
-    // incorrect_answer,
+    correct_answer,
+    showScore: showResults,
     handleTotalUserAnswers,
+    handleScore,
 }) => {
     const [selectedCount, setSelectedCount] = useState(0);
 
@@ -42,8 +44,11 @@ const Question: React.FC<Props> = ({
                         <Answer
                             key={index}
                             text={answer}
+                            correctAnswer={correct_answer}
                             selectAnswer={handleSelect}
                             selectedCount={selectedCount}
+                            showResults={showResults}
+                            handleScore={handleScore}
                         />
                     ))}
                 </div>

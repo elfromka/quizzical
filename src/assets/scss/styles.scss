@@ -62,9 +62,20 @@ body {
     cursor: pointer;
     z-index: 1;
 
+    &:disabled {
+        color: $primaryColor;
+        border-color: $btnBackgroundColor;
+        opacity: 0.5;
+        cursor: default;
+    }
+
     &--primary {
         background-color: $btnBackgroundColor;
         color: $backgroundColor;
+
+        &:disabled {
+            color: $backgroundColor;
+        }
 
         &:hover {
             background-color: darken($btnBackgroundColor, 10%);
@@ -73,19 +84,12 @@ body {
 
     &--outline {
         border: 1px solid $primaryColor;
+        background: $backgroundColor;
     }
 
     &--selected {
         border: 1px solid $selectedAnswerColor;
         background-color: $selectedAnswerColor;
-    }
-
-    &:disabled {
-        color: $primaryColor;
-        border-color: $btnBackgroundColor;
-        opacity: 0.5;
-        cursor: default;
-        color: $lightColor;
     }
 
     &--wrong {
