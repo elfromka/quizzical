@@ -1,4 +1,4 @@
-import { randomizeArrayStrings } from "../utils/utils";
+import { randomizeArrayStrings, decodeObjectValues } from "../utils/utils";
 
 export enum Difficulty {
     EASY = "easy",
@@ -13,9 +13,7 @@ const fetchQuestions = async (
     difficulty: Difficulty,
     abortController: any
 ) => {
-    // TODO: make it work with base64 to not have issues with certain characters in the questions and in the answers as well
-    // const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple&encode=base64`;
-    const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple`;
+    const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple&encode=base64`;
 
     try {
         const response = await fetch(endpoint, {
@@ -26,9 +24,13 @@ const fetchQuestions = async (
             throw new Error("No response. Check the APIs' status.");
         }
 
-        const data = await response.json();
+        const originalData = await response.json();
+        const dataEncoded = [...originalData.results];
+        const dataDecoded = dataEncoded.map((questionObj) =>
+            decodeObjectValues(questionObj)
+        );
 
-        return data.results.map((question: any) => ({
+        return dataDecoded.map((question: any) => ({
             ...question,
             answers: randomizeArrayStrings([
                 ...question.incorrect_answers,
@@ -42,6 +44,8 @@ const fetchQuestions = async (
             );
         }
     }
+
+    return [];
 };
 
 export default fetchQuestions;

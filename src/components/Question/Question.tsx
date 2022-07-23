@@ -2,6 +2,16 @@ import { useState } from "react";
 import { Answer } from "../../components/list";
 import { TotalUserAnswersActions } from "../../pages/Questions/Questions";
 
+export type QuestionObject = {
+    category: string;
+    type: string;
+    difficulty: string;
+    question: string;
+    correct_answer: string;
+    incorrect_answers: string[];
+    answers: string[];
+};
+
 type Props = {
     text: string;
     answers: string[];

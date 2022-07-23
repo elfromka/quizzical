@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Question, Score, Loader } from "../../components/list";
 import fetchQuestions, { Difficulty, NR_OF_QUESTIONS } from "../../api/api";
+import { QuestionObject } from "../../components/Question/Question";
 
 export enum TotalUserAnswersActions {
     INCREMENT = "increment",
@@ -9,7 +10,7 @@ export enum TotalUserAnswersActions {
 
 const Questions = () => {
     const [loading, setLoading] = useState(true);
-    const [questions, setQuestions] = useState([]);
+    const [questions, setQuestions] = useState<QuestionObject[]>([]);
     const [totalUserAnswers, setTotalUserAnswers] = useState(0);
     const [score, setScore] = useState(0);
     const [gameOver, setGameOver] = useState({
@@ -21,7 +22,7 @@ const Questions = () => {
         const abortController = new AbortController();
 
         const fetchData = async () => {
-            const fetchedQuestions = await fetchQuestions(
+            const fetchedQuestions: QuestionObject[] = await fetchQuestions(
                 5,
                 Difficulty.EASY,
                 abortController
@@ -60,7 +61,6 @@ const Questions = () => {
 
     return (
         <>
-            {console.log(totalUserAnswers)}
             <div className="questions container">
                 {loading && questions.length === 0 ? (
                     [...Array(NR_OF_QUESTIONS)].map((currentValue, i) => (
