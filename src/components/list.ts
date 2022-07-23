@@ -1,4 +1,4 @@
-//TODO: add descriptions
+// Importing all component files from subfolders of components
 
 // General components
 export { default as Button } from "./General/Button";

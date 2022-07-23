@@ -11,7 +11,7 @@ const randomizeArrayStrings = (arr: string[]): string[] =>
     [...arr].sort(() => Math.random() - 0.5);
 
 /**
- * Brief description of the function here.
+ * Decodes base64 encoded string values from QuestionObject typed objects.
  *
  * @param {QuestionObject<string>} obj - only QuestionObject type of object with base64 encoded values
  * @return {QuestionObject<string>} QuestionObject with decoded string values.

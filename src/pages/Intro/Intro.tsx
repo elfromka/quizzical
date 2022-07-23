@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
-//TODO: add descriptions
-
-const Intro: React.FC = () => (
+/**
+ * First (intro) page of the application from where the quiz questions loads.
+ *
+ * @return {JSX.Element} with a title and subtitle, start link.
+ */
+const Intro: React.FC = (): JSX.Element => (
     <div className="intro container">
         <Helmet>
             <title>Quizzes - Welcome!</title>
