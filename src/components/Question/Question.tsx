@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Answer } from "../../components/list";
 import { TotalUserAnswersActions } from "../../pages/Questions/Questions";
 
+//TODO: add descriptions
+
 export type QuestionObject = {
     category: string;
     type: string;

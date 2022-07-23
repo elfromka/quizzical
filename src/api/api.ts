@@ -1,4 +1,5 @@
 import { randomizeArrayStrings, decodeObjectValues } from "../utils/utils";
+import { QuestionObject } from "../components/Question/Question";
 
 // Used to retrieve questions from the API with a certain difficulty level (set to easy always)
 export enum Difficulty {
@@ -11,19 +12,20 @@ export enum Difficulty {
 export const NR_OF_QUESTIONS: number = 5;
 
 /**
-* Retrieve questions from the Open Trivia Database API.
-*
-* @param {number} amount - number of questions to retrieve,
-* @param {Difficulty} difficulty - difficulty level of questions,
-* @param {any} abortController - controller object that allows to abort one or more DOM requests as and when desired.
-
-* @return {Array} of objects (questions with their answer(s)) or on fail returns an empty array.
-*/
+ * Retrieve questions from the Open Trivia Database API.
+ *
+ * @async
+ * @param {number} amount - number of questions to retrieve,
+ * @param {Difficulty} difficulty - difficulty level of questions,
+ * @param {any} abortController - controller object that allows to abort one or more DOM requests as and when desired.
+ *
+ * @return {Promise<Array>} of objects (questions with their answer(s)) or on fail returns an empty array.
+ */
 const fetchQuestions = async (
     amount: number = NR_OF_QUESTIONS,
     difficulty: Difficulty,
     abortController: any
-) => {
+): Promise<Array<QuestionObject>> => {
     const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple&encode=base64`;
 
     try {

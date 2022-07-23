@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
+//TODO: add descriptions
+
 const NotFound = () => {
     return (
         <div className="not-found container">

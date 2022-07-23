@@ -3,6 +3,8 @@ import { Question, Score, Loader } from "../../components/list";
 import fetchQuestions, { Difficulty, NR_OF_QUESTIONS } from "../../api/api";
 import { QuestionObject } from "../../components/Question/Question";
 
+//TODO: add descriptions
+
 export enum TotalUserAnswersActions {
     INCREMENT = "increment",
     DECREMENT = "decrement",

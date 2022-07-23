@@ -1,6 +1,11 @@
 import ContentLoader from "react-content-loader";
 
-const Loader = () => (
+/**
+ * Generates an SVG loader for a single question in the Questions page.
+ *
+ * @return {JSX.Element} for the question, its' answers and a separator.
+ */
+const Loader: React.FC = (): JSX.Element => (
     <>
         <ContentLoader
             speed={2}
@@ -17,6 +22,7 @@ const Loader = () => (
             <rect x="230" y="64" rx="3" ry="3" width="100" height="23" />
             <rect x="345" y="64" rx="3" ry="3" width="100" height="23" />
         </ContentLoader>
+
         <hr className="separator" />
     </>
 );

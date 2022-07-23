@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+//TODO: add descriptions
+
 type Props = {
     text: string;
     correctAnswer: string;

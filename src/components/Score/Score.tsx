@@ -1,4 +1,4 @@
-// import { Link } from "react-router-dom";
+//TODO: add descriptions
 
 type ScoreProps = {
     score: number;
@@ -15,9 +15,6 @@ const Score = ({
         <h3 className="score__title">
             You scored {score}/{totalQuestions} correct answers.
         </h3>
-        {/* <Link className="btn btn--primary btn--md" to="/">
-            Play again
-        </Link> */}
         <button className="btn btn--primary btn--md" onClick={handlePlayAgain}>
             Play again
         </button>
