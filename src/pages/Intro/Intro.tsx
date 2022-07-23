@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
-const Intro = () => (
+const Intro: React.FC = () => (
     <div className="intro container">
         <Helmet>
             <title>Quizzes - Welcome!</title>

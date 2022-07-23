@@ -3,7 +3,7 @@ import Routes from "./routes/Routes";
 import { Helmet } from "react-helmet";
 import "./assets/scss/styles.scss";
 
-const App = () => {
+const App: React.FC = () => {
     return (
         <div className="wrapper wrapper--primary wrapper--centered">
             <Helmet>

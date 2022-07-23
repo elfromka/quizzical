@@ -8,7 +8,7 @@ export enum TotalUserAnswersActions {
     DECREMENT = "decrement",
 }
 
-const Questions = () => {
+const Questions: React.FC = () => {
     const [playAgain, setPlayAgain] = useState(false);
     const [loading, setLoading] = useState(true);
     const [questions, setQuestions] = useState<QuestionObject[]>([]);

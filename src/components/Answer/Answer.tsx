@@ -85,16 +85,8 @@ const Answer = ({
     };
 
     return (
-        // TODO: refactor the class set on the buttons - too messy
         <button
             disabled={showResults}
-            // className={`btn btn--outline btn--sm ${
-            //     (!showResults && applySelected && "btn--selected") ||
-            //     (showResults &&
-            //         applySelected &&
-            //         correctAnswer !== text &&
-            //         "btn--wrong")
-            // } ${showResults && correctAnswer === text && "btn--correct"}`}
             className={classes}
             onClick={handleClick}
             value={text}
