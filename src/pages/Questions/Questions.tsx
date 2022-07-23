@@ -9,6 +9,7 @@ export enum TotalUserAnswersActions {
 }
 
 const Questions = () => {
+    const [playAgain, setPlayAgain] = useState(false);
     const [loading, setLoading] = useState(true);
     const [questions, setQuestions] = useState<QuestionObject[]>([]);
     const [totalUserAnswers, setTotalUserAnswers] = useState(0);
@@ -35,7 +36,7 @@ const Questions = () => {
 
         // this will cancel the fetch request when the effect is unmounted
         return () => abortController.abort();
-    }, []);
+    }, [playAgain]);
 
     const handleTotalUserAnswers = (action: TotalUserAnswersActions) => {
         if (action === "increment") {
@@ -57,6 +58,22 @@ const Questions = () => {
             showScoreComponent: !prev.showScoreComponent,
             showCheckButton: !prev.showCheckButton,
         }));
+    };
+
+    const handlePlayAgain = () => {
+        setPlayAgain((prev) => !prev);
+        resetStates();
+    };
+
+    const resetStates = () => {
+        setTotalUserAnswers(0);
+        setLoading(false);
+        setQuestions([]);
+        setScore(0);
+        setGameOver({
+            showScoreComponent: false,
+            showCheckButton: true,
+        });
     };
 
     return (
@@ -99,7 +116,11 @@ const Questions = () => {
                 </button>
             )}
             {gameOver.showScoreComponent && (
-                <Score score={score} totalQuestions={NR_OF_QUESTIONS} />
+                <Score
+                    score={score}
+                    totalQuestions={NR_OF_QUESTIONS}
+                    handlePlayAgain={handlePlayAgain}
+                />
             )}
         </>
     );

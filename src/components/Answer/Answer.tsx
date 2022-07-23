@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type Props = {
     text: string;
@@ -18,6 +18,60 @@ const Answer = ({
     handleScore: handleScorePointsIncrement,
 }: Props) => {
     const [applySelected, setApplySelected] = useState(false);
+    const [classList, setClassList] = useState([
+        "btn",
+        "btn--outline",
+        "btn--sm",
+    ]);
+
+    useEffect(() => {
+        if (applySelected) {
+            if (showResults) {
+                if (correctAnswer !== text) {
+                    return setClassList((prevClassList) => [
+                        ...prevClassList,
+                        "btn--wrong",
+                    ]);
+                }
+
+                return setClassList((prevClassList) => [
+                    ...prevClassList,
+                    "btn--correct",
+                ]);
+            }
+
+            return setClassList((prevClassList) => [
+                ...prevClassList,
+                "btn--selected",
+            ]);
+        }
+
+        if (!showResults) {
+            setClassList((prevClassList) => {
+                const copiedprevClassList = [...prevClassList];
+                const indexSelectedClass =
+                    copiedprevClassList.indexOf("btn--selected");
+
+                if (indexSelectedClass !== -1) {
+                    copiedprevClassList.splice(indexSelectedClass, 1);
+                    return copiedprevClassList;
+                }
+
+                return prevClassList;
+            });
+        }
+
+        if (showResults) {
+            if (correctAnswer === text) {
+                return setClassList((prevClassList) => [
+                    ...prevClassList,
+                    "btn--correct",
+                ]);
+            }
+        }
+    }, [showResults, applySelected, correctAnswer, text]);
+
+    const classes = classList.join(" ");
 
     const handleClick = () => {
         if (selectedCount === 0 || applySelected) {
@@ -34,13 +88,14 @@ const Answer = ({
         // TODO: refactor the class set on the buttons - too messy
         <button
             disabled={showResults}
-            className={`btn btn--outline btn--sm ${
-                (!showResults && applySelected && "btn--selected") ||
-                (showResults &&
-                    applySelected &&
-                    correctAnswer !== text &&
-                    "btn--wrong")
-            } ${showResults && correctAnswer === text && "btn--correct"}`}
+            // className={`btn btn--outline btn--sm ${
+            //     (!showResults && applySelected && "btn--selected") ||
+            //     (showResults &&
+            //         applySelected &&
+            //         correctAnswer !== text &&
+            //         "btn--wrong")
+            // } ${showResults && correctAnswer === text && "btn--correct"}`}
+            className={classes}
             onClick={handleClick}
             value={text}
         >

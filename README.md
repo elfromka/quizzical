@@ -3,11 +3,14 @@ Solo and final project from Scrimbas' <a href="https://scrimba.com/learn/learnre
 
 <a href="https://www.figma.com/file/6guWTOHY8N2i0NZHjcmRDK/Quizzical-App-(Copy)" target="_blank">Figma file(s)</a> copied of the design provided in the course by Scrimba.
 
-## Stack:
+## Stack/packages:
   - React (v.18.0.14) with TS templates (TypeScript (v4.7.4))
-  - React Router Dom (v6.3.0)
+  - React Router DOM (v6.3.0)
+  - ReactContentLoader (v6.2.0)
+  - React Helmet with @types (v6.1.0)
+  - Normalize.css (v8.0.1)
   - SASS (v1.53.0)
-  - Axios (0.27.2)
+  - js-base64 (v3.7.2)
 
 Description:
 1. Two screens:

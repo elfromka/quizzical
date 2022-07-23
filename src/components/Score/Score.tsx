@@ -1,18 +1,26 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 type ScoreProps = {
     score: number;
     totalQuestions: number;
+    handlePlayAgain: () => void;
 };
 
-const Score = ({ score = 0, totalQuestions = 0 }: ScoreProps) => (
+const Score = ({
+    score = 0,
+    totalQuestions = 0,
+    handlePlayAgain,
+}: ScoreProps) => (
     <div className="score">
         <h3 className="score__title">
             You scored {score}/{totalQuestions} correct answers.
         </h3>
-        <Link className="btn btn--primary btn--md" to="/">
+        {/* <Link className="btn btn--primary btn--md" to="/">
             Play again
-        </Link>
+        </Link> */}
+        <button className="btn btn--primary btn--md" onClick={handlePlayAgain}>
+            Play again
+        </button>
     </div>
 );
 
