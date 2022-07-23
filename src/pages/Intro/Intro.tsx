@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
  * @return {JSX.Element} with a title and subtitle, start link.
  */
 const Intro: React.FC = (): JSX.Element => (
-    <div className="intro container">
+    <section className="intro container">
         <Helmet>
             <title>Quizzes - Welcome!</title>
         </Helmet>
@@ -18,7 +18,7 @@ const Intro: React.FC = (): JSX.Element => (
         <Link className="btn btn--primary btn--xl" to="/questions">
             Start quiz
         </Link>
-    </div>
+    </section>
 );
 
 export default Intro;

@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
  * @return {JSX.Element} with a title, subtitle, and a go back button which goes to the Intro page.
  */
 const NotFound: React.FC = (): JSX.Element => (
-    <div className="not-found container">
+    <section className="not-found container">
         <Helmet>
             <title>Quizzes - 404 - Not found</title>
         </Helmet>
@@ -20,7 +20,7 @@ const NotFound: React.FC = (): JSX.Element => (
         <Link className="btn btn--primary btn--xl" to="/">
             Go back
         </Link>
-    </div>
+    </section>
 );
 
 export default NotFound;

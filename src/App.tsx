@@ -1,6 +1,6 @@
 import { BrowserRouter as Router } from "react-router-dom";
-import Routes from "./routes/Routes";
 import { Helmet } from "react-helmet";
+import Routes from "./routes/Routes";
 
 import "./assets/scss/styles.scss";
 

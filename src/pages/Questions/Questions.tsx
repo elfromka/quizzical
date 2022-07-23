@@ -80,7 +80,7 @@ const Questions: React.FC = () => {
 
     return (
         <>
-            <div className="questions container">
+            <section className="questions container">
                 {loading && questions.length === 0 ? (
                     [...Array(NR_OF_QUESTIONS)].map((currentValue, i) => (
                         <Loader key={`${currentValue}-${i}`} />
@@ -104,7 +104,7 @@ const Questions: React.FC = () => {
                         )}
                     </>
                 )}
-            </div>
+            </section>
             {gameOver.showCheckButton && (
                 <button
                     disabled={
