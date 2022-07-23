@@ -4,6 +4,8 @@ import Routes from "./routes/Routes";
 
 import "./assets/scss/styles.scss";
 
+//TODO: Error in console of browser caused by the react-helmet module. Check: https://github.com/nfl/react-helmet/issues/623
+
 /**
  * Returns the default component of the project and its' children (pages and their components) through routes.
  *
