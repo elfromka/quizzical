@@ -14,7 +14,7 @@ import "./assets/scss/styles.scss";
 const App: React.FC = (): JSX.Element => (
     <main className="wrapper wrapper--primary wrapper--centered">
         <Helmet>
-            <title>Quizzes</title>
+            <title>Quizzical</title>
             <meta
                 name="description"
                 content="Test your general knowledge with 5 questions from various topics in this quiz."

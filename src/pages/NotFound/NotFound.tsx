@@ -9,7 +9,7 @@ import { Helmet } from "react-helmet";
 const NotFound: React.FC = (): JSX.Element => (
     <section className="not-found container">
         <Helmet>
-            <title>Quizzes - 404 - Not found</title>
+            <title>Quizzical - 404 - Not found</title>
         </Helmet>
         <h1 className="not-found__title not-found__title--dark-grey">
             404 - Not found
