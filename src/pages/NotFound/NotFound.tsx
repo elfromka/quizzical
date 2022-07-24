@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
 
 /**
  * 404 not found page for any other route than "/" and "/questions".
@@ -8,9 +7,6 @@ import { Helmet } from "react-helmet";
  */
 const NotFound: React.FC = (): JSX.Element => (
     <section className="not-found container">
-        <Helmet>
-            <title>Quizzical - 404 - Not found</title>
-        </Helmet>
         <h1 className="not-found__title not-found__title--dark-grey">
             404 - Not found
         </h1>

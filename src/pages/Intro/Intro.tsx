@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
 
 /**
  * First (intro) page of the application from where the quiz questions loads.
@@ -8,9 +7,6 @@ import { Helmet } from "react-helmet";
  */
 const Intro: React.FC = (): JSX.Element => (
     <section className="intro container">
-        <Helmet>
-            <title>Quizzical - Welcome!</title>
-        </Helmet>
         <h1 className="intro__title intro__title--dark-grey">Quizzical</h1>
         <h2 className="intro__subtitle intro__subtitle--primary">
             Test yourself right now

@@ -7,7 +7,6 @@ Solo and final project from Scrimbas' <a href="https://scrimba.com/learn/learnre
   - React (v.18.0.14) with TS templates (TypeScript (v4.7.4))
   - React Router DOM (v6.3.0)
   - ReactContentLoader (v6.2.0)
-  - React Helmet with @types (v6.1.0)
   - Normalize.css (v8.0.1)
   - SASS (v1.53.0)
   - js-base64 (v3.7.2)

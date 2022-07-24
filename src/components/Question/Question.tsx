@@ -4,7 +4,7 @@ import { TotalUserAnswersActions } from "../../pages/Questions/Questions";
 
 //TODO: add descriptions
 
-export type QuestionObject = {
+export interface QuestionObject {
     category: string;
     type: string;
     difficulty: string;
@@ -12,16 +12,16 @@ export type QuestionObject = {
     correct_answer: string;
     incorrect_answers: string[];
     answers: string[];
-};
+}
 
-type Props = {
+interface Props {
     text: string;
     answers: string[];
     correct_answer: string;
     showScore: boolean;
     handleTotalUserAnswers: (action: TotalUserAnswersActions) => void;
     handleScore: () => void;
-};
+}
 
 const Question: React.FC<Props> = ({
     text,
