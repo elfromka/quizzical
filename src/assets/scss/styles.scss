@@ -31,13 +31,35 @@ body {
     width: 20rem;
 
     &--top {
-        clip-path: polygon(61% 0, 82% 3%, 95% 13%, 100% 25%, 98% 64%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
+        clip-path: polygon(
+            61% 0,
+            82% 3%,
+            95% 13%,
+            100% 25%,
+            98% 64%,
+            50% 100%,
+            20% 90%,
+            0% 70%,
+            0% 35%,
+            20% 10%
+        );
         top: -8rem;
         right: 0;
     }
 
     &--bottom {
-        clip-path: polygon(61% 0, 82% 3%, 95% 13%, 100% 25%, 98% 64%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
+        clip-path: polygon(
+            61% 0,
+            82% 3%,
+            95% 13%,
+            100% 25%,
+            98% 64%,
+            50% 100%,
+            20% 90%,
+            0% 70%,
+            0% 35%,
+            20% 10%
+        );
         left: -8rem;
         bottom: 0;
     }
@@ -77,7 +99,7 @@ body {
             color: $backgroundColor;
         }
 
-        &:hover {
+        &:hover:not([disabled]) {
             background-color: darken($btnBackgroundColor, 10%);
         }
     }
@@ -98,7 +120,7 @@ body {
         opacity: 0.5;
 
         &:disabled {
-            border-color: $wrongAnswerColor
+            border-color: $wrongAnswerColor;
         }
     }
 
@@ -114,7 +136,7 @@ body {
 
     &--sm {
         padding: 0.5rem 1.2rem;
-        border-radius: .9rem;
+        border-radius: 0.9rem;
     }
 
     &--md {
@@ -179,6 +201,21 @@ body {
 }
 
 // 2. Questions
+.questions__info {
+    margin-bottom: 3rem;
+    font-size: 1.2rem;
+
+    &:before {
+        content: "i";
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        background-color: $selectedAnswerColor;
+        border-radius: 50%;
+        margin-right: 1rem;
+        font-weight: bold;
+    }
+}
+
 .question {
     &__title {
         font-family: $secondaryFont;
@@ -186,7 +223,7 @@ body {
         font-weight: bold;
 
         &--primary {
-            color: $primaryColor
+            color: $primaryColor;
         }
     }
 }
@@ -204,7 +241,7 @@ body {
     margin-top: 0;
 
     &:last-child {
-        margin-bottom: 3rem;
+        margin-bottom: 1.5rem;
     }
 }
 

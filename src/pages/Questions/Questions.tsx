@@ -134,6 +134,10 @@ const Questions: React.FC = (): JSX.Element => {
                         )}
                     </>
                 )}
+                <p className="questions__info">
+                    Click again on an already selected answer to <b>deselect</b>{" "}
+                    it.
+                </p>
             </section>
             {gameOver.showCheckButton && (
                 <button
