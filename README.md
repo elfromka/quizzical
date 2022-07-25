@@ -1,9 +1,9 @@
 # quizzical
-Solo and final project from Scrimbas' <a href="https://scrimba.com/learn/learnreact" target="_blank"><b>Learn React for free</b></a> course - A quiz app, data used retrieved from <a href="https://opentdb.com/api_config.php" target="_blank">OTDB API</a>
+Solo and final project from Scrimbas' <a href="https://scrimba.com/learn/learnreact" target="_blank"><b>Learn React for free</b></a> course - A quiz app, questions fetched from <a href="https://opentdb.com/api_config.php" target="_blank">OTDB API</a>.
 
 <a href="https://www.figma.com/file/6guWTOHY8N2i0NZHjcmRDK/Quizzical-App-(Copy)" target="_blank">Figma file(s)</a> copied of the design provided in the course by Scrimba.
 
-## Stack/packages:
+## Packages and libraries used:
   - React (v.18.0.14) with TS templates (TypeScript (v4.7.4))
   - React Router DOM (v6.3.0)
   - ReactContentLoader (v6.2.0)
@@ -12,17 +12,25 @@ Solo and final project from Scrimbas' <a href="https://scrimba.com/learn/learnre
   - js-base64 (v3.7.2)
 
 Description:
-1. Two screens:
+1. Intro page: <br>
 
-   - Intro page:<br>
-   <img src="./figma_exports/1.1-intro-page.png" width="450px">
+   <img src="./screenshots/1. Intro page.png" width="450px">
+   <br><br>
 
-   - Questions page: <br>
-   <img src="./figma_exports/1.2-questions.png" width="450px">
-   <br>
+2. Questions page:
+   - fetching and displaying questions from the API: <br>
+   <img src="./screenshots/2.1. Questions - questions loaded.png" width="450px">
+   <br><br>
 
-2. Pull 5 questions from the [OTDB API](https://opentdb.com/api_config.php)
+   - selecting answers for each question: <br>
+   <img src="./screenshots/2.2. Questions - answers selected.png" width="450px">
+   <br><br>
 
-3. Show correct answers after the 'Check answers' button is clicked: <br>
-   - Results page (with correct and incorrect answers + score): <br>
-    <img src="./figma_exports/1.3-results.png" width="450px">
+   - check score and correct answers: <br>
+   <img src="./screenshots/2.3. Questions - answers checked.png" width="450px">
+   <br><br>
+
+3. Not found page: <br>
+
+   <img src="./screenshots/3. 404 page - not found.png" width="450px">
+   <br><br>

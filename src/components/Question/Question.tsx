@@ -9,8 +9,8 @@ import { Actions } from "../../pages/Questions/Questions";
  * @prop {string} difficulty - easy | medium | hard
  * @prop {string} question - the question string
  * @prop {string} correct_answer - the correct answer of the question
- * @prop {array} incorrect_answers - an array of the incorrect answers
- * @prop {array} answers - the correct and the incorrect answers combined randomly in an array
+ * @prop {Array<string>} incorrect_answers - an array of the incorrect answers
+ * @prop {Array<string>} answers - the correct and the incorrect answers combined randomly in an array
  */
 export interface QuestionObject {
     category: string;
@@ -25,7 +25,7 @@ export interface QuestionObject {
 /**
  * @typedef Props
  * @prop {string} text - the actual question
- * @prop {array} answers - all answers (incorrect ones with the correct one) in an array
+ * @prop {Array<string>} answers - all answers (incorrect ones with the correct one) in an array
  * @prop {string} correct_answer - the correct answer
  * @prop {boolean} showScore - hide/display the score component
  * @prop {} handleTotalUserAnswers - method to increase/decrease total nr of answers of the user
