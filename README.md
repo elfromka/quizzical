@@ -4,7 +4,7 @@ Solo and final project from Scrimbas' <a href="https://scrimba.com/learn/learnre
 <a href="https://www.figma.com/file/6guWTOHY8N2i0NZHjcmRDK/Quizzical-App-(Copy)" target="_blank">Figma file(s)</a> copied of the design provided in the course by Scrimba.
 
 ## Packages and libraries used:
-  - React (v.18.0.14) with TS templates (TypeScript (v4.7.4))
+  - React (v18.2.0) with TS templates (TypeScript (v4.7.4))
   - React Router DOM (v6.3.0)
   - ReactContentLoader (v6.2.0)
   - Normalize.css (v8.0.1)
