@@ -9,7 +9,7 @@ const Intro: React.FC = (): JSX.Element => (
     <section className="intro container">
         <h1 className="intro__title intro__title--dark-grey">Quizzical</h1>
         <h2 className="intro__subtitle intro__subtitle--primary">
-            Test yourself right now
+            Test your knowledge with 5 random questions.
         </h2>
         <Link className="btn btn--primary btn--xl" to="/questions">
             Start quiz

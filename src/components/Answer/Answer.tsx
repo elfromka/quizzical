@@ -5,10 +5,10 @@ import { Actions } from "../../pages/Questions/Questions";
  * @typedef Props
  * @prop {string} text - the answer to display
  * @prop {string} correctAnswer - the correct answer
- * @prop {Function} selectAnswer - sets selected answer of the user
+ * @prop {} selectAnswer - sets selected answer of the user
  * @prop {number} selectedCount - flag if an answer is selected
  * @prop {boolean} showResults - disable the answer buttons if the results has to be shown
- * @prop {Function} handleScore - increase score points
+ * @prop {} handleScore - increase score points
  */
 interface Props {
     text: string;
@@ -94,8 +94,6 @@ const Answer = ({
     /**
      * Toggles the selected state of the answer button, changes the classes, and increases score
      * points if the selected answer is the correct answer.
-     *
-     * @return void
      */
     const handleClick = (): void => {
         if (selectedCount === 0 || applySelected) {

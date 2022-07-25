@@ -189,10 +189,6 @@ body {
             color: $primaryColor
         }
     }
-
-    &:last-child {
-        margin-bottom: 3rem;
-    }
 }
 
 .answers {
@@ -206,6 +202,10 @@ body {
     border: 0;
     border-top: 1px solid $questionHRColor;
     margin-top: 0;
+
+    &:last-child {
+        margin-bottom: 3rem;
+    }
 }
 
 .score {

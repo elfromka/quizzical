@@ -2,7 +2,7 @@
  * @typedef ScoreProps
  * @prop {number} score - total points of user
  * @prop {number} totalQuestions - number of questions displayed
- * @prop {Function} handlePlayAgain - quiz start method/action
+ * @prop {} handlePlayAgain - quiz start method/action
  */
 interface ScoreProps {
     score: number;
