@@ -11,7 +11,7 @@ Solo and final project from Scrimbas' <a href="https://scrimba.com/learn/learnre
   - SASS (v1.53.0)
   - js-base64 (v3.7.2)
 
-Screenshots with a brief description for each:
+## Screenshots with a brief description for each:
 1. Intro page: <br>
 
    <img src="./screenshots/1. Intro page.png" width="450px">
