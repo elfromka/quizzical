@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Actions } from "../../pages/Questions/Questions";
 
 /**
  * @typedef Props
@@ -15,7 +16,7 @@ interface Props {
     selectAnswer: () => void;
     selectedCount: number;
     showResults: boolean;
-    handleScore: () => void;
+    handleScore: (action: Actions) => void;
 }
 
 /**
@@ -103,7 +104,12 @@ const Answer = ({
         }
 
         if (correctAnswer === text) {
-            handleScorePointsIncrement();
+            if (!applySelected) {
+                handleScorePointsIncrement(Actions.INCREMENT);
+                return;
+            }
+
+            handleScorePointsIncrement(Actions.DECREMENT);
         }
     };
 

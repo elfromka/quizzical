@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Answer } from "../../components/list";
-import { TotalUserAnswersActions } from "../../pages/Questions/Questions";
+import { Actions } from "../../pages/Questions/Questions";
 
 //TODO: add descriptions
 
@@ -19,8 +19,8 @@ interface Props {
     answers: string[];
     correct_answer: string;
     showScore: boolean;
-    handleTotalUserAnswers: (action: TotalUserAnswersActions) => void;
-    handleScore: () => void;
+    handleTotalUserAnswers: (action: Actions) => void;
+    handleScore: (action: Actions) => void;
 }
 
 const Question: React.FC<Props> = ({
@@ -37,12 +37,12 @@ const Question: React.FC<Props> = ({
         if (selectedCount > 1) return;
         if (selectedCount === 1) {
             setSelectedCount((prev) => prev - 1);
-            handleTotalUserAnswers(TotalUserAnswersActions.DECREMENT);
+            handleTotalUserAnswers(Actions.DECREMENT);
 
             return;
         }
         setSelectedCount((prev) => prev + 1);
-        handleTotalUserAnswers(TotalUserAnswersActions.INCREMENT);
+        handleTotalUserAnswers(Actions.INCREMENT);
     };
 
     return (

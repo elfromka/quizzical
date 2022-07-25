@@ -5,7 +5,7 @@ import { QuestionObject } from "../../components/Question/Question";
 
 //TODO: add descriptions
 
-export enum TotalUserAnswersActions {
+export enum Actions {
     INCREMENT = "increment",
     DECREMENT = "decrement",
 }
@@ -40,7 +40,7 @@ const Questions: React.FC = () => {
         return () => abortController.abort();
     }, [playAgain]);
 
-    const handleTotalUserAnswers = (action: TotalUserAnswersActions) => {
+    const handleTotalUserAnswers = (action: Actions) => {
         if (action === "increment") {
             setTotalUserAnswers((prevNr) => prevNr + 1);
 
@@ -50,8 +50,13 @@ const Questions: React.FC = () => {
         setTotalUserAnswers((prevNr) => prevNr - 1);
     };
 
-    const handleScore = () => {
-        setScore((prevScore) => prevScore + 1);
+    const handleScore = (action: Actions) => {
+        if (action === "increment") {
+            setScore((prevScore) => prevScore + 1);
+            return;
+        }
+
+        setScore((prevScore) => prevScore - 1);
     };
 
     const handleCheckButtonClick = () => {
