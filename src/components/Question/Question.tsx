@@ -2,8 +2,16 @@ import { useState } from "react";
 import { Answer } from "../../components/list";
 import { Actions } from "../../pages/Questions/Questions";
 
-//TODO: add descriptions
-
+/**
+ * @typedef QuestionObject
+ * @prop {string} category - category from which the question is included
+ * @prop {string} type - type of answers (multiple choice or true/false)
+ * @prop {string} difficulty - easy | medium | hard
+ * @prop {string} question - the question string
+ * @prop {string} correct_answer - the correct answer of the question
+ * @prop {array} incorrect_answers - an array of the incorrect answers
+ * @prop {array} answers - the correct and the incorrect answers combined randomly in an array
+ */
 export interface QuestionObject {
     category: string;
     type: string;
@@ -14,6 +22,15 @@ export interface QuestionObject {
     answers: string[];
 }
 
+/**
+ * @typedef Props
+ * @prop {string} text - the actual question
+ * @prop {array} answers - all answers (incorrect ones with the correct one) in an array
+ * @prop {string} correct_answer - the correct answer
+ * @prop {boolean} showScore - hide/display the score component
+ * @prop {} handleTotalUserAnswers - method to increase/decrease total nr of answers of the user
+ * @prop {} handleScore - method to increase/decrease the score of the user
+ */
 interface Props {
     text: string;
     answers: string[];
@@ -23,6 +40,11 @@ interface Props {
     handleScore: (action: Actions) => void;
 }
 
+/**
+ * Renders a question element with the data fetched from the API.
+ * @param {Props} obj - having the question, answers, some methods, etc.
+ * @return {JSX.Element} question and its' answers
+ */
 const Question: React.FC<Props> = ({
     text,
     answers,
@@ -30,17 +52,21 @@ const Question: React.FC<Props> = ({
     showScore: showResults,
     handleTotalUserAnswers,
     handleScore,
-}) => {
+}): JSX.Element => {
     const [selectedCount, setSelectedCount] = useState(0);
 
-    const handleSelect = () => {
+    /**
+     * Invoked on click of an answer component.
+     */
+    const handleSelect = (): void => {
         if (selectedCount > 1) return;
+
         if (selectedCount === 1) {
             setSelectedCount((prev) => prev - 1);
             handleTotalUserAnswers(Actions.DECREMENT);
-
             return;
         }
+
         setSelectedCount((prev) => prev + 1);
         handleTotalUserAnswers(Actions.INCREMENT);
     };
