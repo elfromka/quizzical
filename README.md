@@ -34,3 +34,14 @@ Solo and final project from Scrimbas' <a href="https://scrimba.com/learn/learnre
 
    <img src="./screenshots/3. 404 page - not found.png" width="450px">
    <br><br>
+
+## Some features/updates to add later on:
+- [ ] add fields to set on the Intro page the following:
+  - [ ] number of questions
+  - [ ] category
+  - [ ] difficulty
+  - [ ] type
+- [ ] add dark mode
+- [ ] re-check logic of some components (Question, Questions, etc.)
+- [ ] apply "Separation of concern": https://felixgerschau.com/react-hooks-separation-of-concerns/
+- [ ] add Context API
