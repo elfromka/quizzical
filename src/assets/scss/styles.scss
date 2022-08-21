@@ -91,6 +91,12 @@ body {
         cursor: default;
     }
 
+    &:hover {
+        &:not(.btn--selected):not([disabled]):not(.btn--primary) {
+            background-color: darken($backgroundColor, 5%);
+        }
+    }
+
     &--primary {
         background-color: $btnBackgroundColor;
         color: $backgroundColor;
