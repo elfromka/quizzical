@@ -161,8 +161,8 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    padding: 4rem;
+    min-height: 100vh;
+    padding: 6rem 4rem;
 
     &--primary {
         background-color: $backgroundColor;
