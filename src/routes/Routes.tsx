@@ -1,5 +1,5 @@
 import { useRoutes } from "react-router-dom";
-import { Intro, NotFound, Questions } from "../pages/list";
+import { Intro, NotFound, Questions } from "../pages";
 
 /**
  * Used for set the routing of the whole application.

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Question, Score, Loader, Button } from "../../components/list";
+import { Question, Score, Loader, Button } from "../../components";
 import fetchQuestions, { Difficulty, NR_OF_QUESTIONS } from "../../api/api";
 import { QuestionObject } from "../../components/Question/Question";
 

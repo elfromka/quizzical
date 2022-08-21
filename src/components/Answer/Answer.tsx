@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Actions } from "../../pages/Questions/Questions";
-import { Button } from "../list";
+import { Button } from "../../components";
 
 /**
  * @typedef Props

@@ -1,4 +1,4 @@
-import { Button } from "../list";
+import { Button } from "../../components";
 
 /**
  * @typedef ScoreProps

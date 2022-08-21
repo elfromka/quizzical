@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Answer } from "../../components/list";
 import { Actions } from "../../pages/Questions/Questions";
+import { Answer } from "../../components";
 
 /**
  * @typedef QuestionObject
