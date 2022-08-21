@@ -1,5 +1,4 @@
 import { decode } from "js-base64";
-import { QuestionObject } from "../components/Question/Question";
 
 /**
  * Arranges strings in a random order from a given array.
@@ -11,26 +10,25 @@ const randomizeArrayStrings = (arr: string[]): string[] =>
     [...arr].sort(() => Math.random() - 0.5);
 
 /**
- * Decodes base64 encoded string values from QuestionObject typed objects.
+ * Decodes base64 encoded string values from an object.
  *
- * @param {QuestionObject<string>} obj - only QuestionObject type of object with base64 encoded values
- * @return {QuestionObject<string>} QuestionObject with decoded string values.
+ * @param {object} object - object with base64 encoded string values
+ * @return {object} object with decoded string values.
  */
-//TODO: needs change to be more general (on the object structure)!
-const decodeObjectValues = ({
-    category,
-    type,
-    difficulty,
-    question,
-    correct_answer,
-    incorrect_answers,
-}: QuestionObject) => ({
-    category: decode(category),
-    type: decode(type),
-    difficulty: decode(difficulty),
-    question: decode(question),
-    correct_answer: decode(correct_answer),
-    incorrect_answers: incorrect_answers.map((answer) => decode(answer)),
-});
+const decodeObjectValues = (object: Record<string, any>): object => {
+    let decodedObject = {};
+    const entries: [string, Array<string>][] = Object.entries(object);
+
+    for (const [key, value] of entries) {
+        decodedObject = {
+            ...decodedObject,
+            [key]: !Array.isArray(value)
+                ? decode(value)
+                : value.map((valueItem) => decode(valueItem)),
+        };
+    }
+
+    return decodedObject;
+};
 
 export { randomizeArrayStrings, decodeObjectValues };
