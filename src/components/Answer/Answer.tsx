@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Actions } from "../../pages/Questions/Questions";
+import { Button } from "../list";
 
 /**
  * @typedef Props
@@ -112,14 +113,9 @@ const Answer = ({
     };
 
     return (
-        <button
-            disabled={showResults}
-            className={classes}
-            onClick={handleClick}
-            value={text}
-        >
+        <Button classes={classes} disabled={showResults} onClick={handleClick}>
             {text}
-        </button>
+        </Button>
     );
 };
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Question, Score, Loader } from "../../components/list";
+import { Question, Score, Loader, Button } from "../../components/list";
 import fetchQuestions, { Difficulty, NR_OF_QUESTIONS } from "../../api/api";
 import { QuestionObject } from "../../components/Question/Question";
 
@@ -140,16 +140,16 @@ const Questions: React.FC = (): JSX.Element => {
                 </p>
             </section>
             {gameOver.showCheckButton && (
-                <button
+                <Button
+                    classes="btn btn--primary btn--md"
+                    onClick={handleCheckButtonClick}
                     disabled={
                         (loading && (questions.length === 0 ? true : false)) ||
                         totalUserAnswers < NR_OF_QUESTIONS
                     }
-                    className="btn btn--primary btn--md"
-                    onClick={handleCheckButtonClick}
                 >
                     Check answers
-                </button>
+                </Button>
             )}
             {gameOver.showScoreComponent && (
                 <Score

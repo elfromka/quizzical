@@ -1,3 +1,5 @@
+import { Button } from "../list";
+
 /**
  * @typedef ScoreProps
  * @prop {number} score - total points of user
@@ -17,18 +19,18 @@ interface ScoreProps {
  * @param {Object<ScoreProps>} obj - (?) score, nr of questions and method of replay
  * @return {JSX.Element} with the final points and a button for replay
  */
-const Score = ({
+const Score: React.FC<ScoreProps> = ({
     score = 0,
     totalQuestions = 0,
     handlePlayAgain,
-}: ScoreProps): JSX.Element => (
+}): JSX.Element => (
     <div className="score">
         <h3 className="score__title">
             You scored {score}/{totalQuestions} correct answers.
         </h3>
-        <button className="btn btn--primary btn--md" onClick={handlePlayAgain}>
+        <Button classes="btn btn--primary btn--md" onClick={handlePlayAgain}>
             Play again
-        </button>
+        </Button>
     </div>
 );
 
