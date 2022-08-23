@@ -36,7 +36,7 @@ Solo and final project from Scrimbas' <a href="https://scrimba.com/learn/learnre
    <br><br>
 
 ## Some features/updates to add later on:
-- [ ] add fields to set on the Intro page the following:
+- [ ] add fields to set on the Intro page the following (Issue [#1](https://github.com/elfromka/quizzical/issues/1)):
   - [ ] number of questions
   - [ ] category
   - [ ] difficulty
