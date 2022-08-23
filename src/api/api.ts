@@ -1,12 +1,46 @@
 import { randomizeArrayStrings, decodeObjectValues } from "../utils/utils";
 import { QuestionObject } from "../components/Question/Question";
 
-// Used to retrieve questions from the API with a certain difficulty level (set to easy always)
+// To retrieve questions from the API with a certain difficulty level
 export enum Difficulty {
     EASY = "easy",
     MEDIUM = "medium",
     HARD = "hard",
 }
+
+// Set questions' choices/answers type for each question
+export enum Type {
+    MULTIPLE = "multiple",
+    BOOLEAN = "boolean",
+}
+
+// Retrieve questions in a certain category
+export const categories: string[] = [
+    "General Knowledge",
+    "Entertainment: Books",
+    "Entertainment: Film",
+    "Entertainment: Music",
+    "Entertainment: Musicals & Theatres",
+    "Entertainment: Television",
+    "Entertainment: Video Games",
+    "Entertainment: Board Games",
+    "Science & Nature",
+    "Science: Computers",
+    "Science: Mathematics",
+    "Mythology",
+    "Sports",
+    "Geography",
+    "History",
+    "Politics",
+    "Art",
+    "Celebrities",
+    "Animals",
+    "Vehicles",
+    "Entertainment: Comics",
+    "Science: Gadgets",
+    "Entertainment: Japanese Anime & Manga",
+    "Entertainment: Cartoon & Animations",
+];
 
 // Total number of questions retrieved from the API currently by default
 export const NR_OF_QUESTIONS: number = 5;
@@ -26,7 +60,11 @@ const fetchQuestions = async (
     difficulty: Difficulty,
     abortController: any
 ): Promise<Array<QuestionObject>> => {
-    const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple&encode=base64`;
+    const type: string = "multiple";
+    const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=${type}&encode=base64`;
+
+    // TODO: related and disabled code for #1 GitHub issue
+    // const endpoint = `https://opentdb.com/api.php?amount=${amount}&category=${category}&type=${type}&difficulty=${difficulty}&type=multiple&encode=base64`
 
     try {
         const response = await fetch(endpoint, {

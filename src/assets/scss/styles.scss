@@ -73,6 +73,17 @@ body {
     }
 }
 
+.select-wrapper {
+    &__label {
+        display: block;
+        text-align: left;
+    }
+
+    & + .select-wrapper {
+        margin-left: 1.4rem;
+    }
+}
+
 .btn {
     border: 0;
     background: unset;
@@ -183,6 +194,7 @@ body {
 // 1. Intro
 .intro {
     text-align: center;
+    // max-width: 900px;
 
     &__title {
         font-size: 3.2rem;
@@ -203,6 +215,12 @@ body {
         &--primary {
             color: $primaryColor;
         }
+    }
+
+    .settings-container {
+        display: flex;
+        margin-bottom: 3rem;
+        flex-wrap: wrap;
     }
 }
 
