@@ -24,7 +24,7 @@ const Select: React.FC<SelectInterface> = ({
     options,
     handleChange,
 }: SelectInterface): JSX.Element => (
-    <span className="select-wrapper">
+    <div className="select-wrapper">
         <label htmlFor={name} className="select-wrapper__label">
             {text}
         </label>
@@ -40,7 +40,7 @@ const Select: React.FC<SelectInterface> = ({
                 </option>
             ))}
         </select>
-    </span>
+    </div>
 );
 
 export default Select;

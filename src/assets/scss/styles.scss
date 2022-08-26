@@ -74,13 +74,28 @@ body {
 }
 
 .select-wrapper {
+    margin-bottom: 2.4rem;
+
     &__label {
         display: block;
-        text-align: left;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
     }
 
-    & + .select-wrapper {
-        margin-left: 1.4rem;
+    &__select.select {
+        text-align: center;
+        width: 100%;
+        border: 1px solid $primaryColor;
+        border-radius: 1rem;
+        color: $primaryColor;
+        font-size: 1.4rem;
+        padding: 1.4rem 1rem;
+        transition: $transition-duration;
+        cursor: pointer;
+
+        &:hover {
+            background-color: darken($backgroundColor, 5%);
+        }
     }
 }
 
@@ -194,7 +209,7 @@ body {
 // 1. Intro
 .intro {
     text-align: center;
-    // max-width: 900px;
+    max-width: 768px;
 
     &__title {
         font-size: 3.2rem;
@@ -218,9 +233,7 @@ body {
     }
 
     .settings-container {
-        display: flex;
-        margin-bottom: 3rem;
-        flex-wrap: wrap;
+        margin-bottom: 4rem;
     }
 }
 
@@ -304,5 +317,31 @@ body {
         &--primary {
             color: $primaryColor;
         }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .select-wrapper {
+        margin-bottom: 1rem;
+
+        &__label {
+            display: block;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        &__select.select {
+            text-align: left;
+            padding: 1.4rem 1rem;
+        }
+
+        & + .select-wrapper {
+            margin-left: 1.4rem;
+        }
+    }
+
+    .intro .settings-container {
+        display: flex;
+        margin: 4rem auto;
     }
 }
