@@ -15,8 +15,10 @@ const Intro: React.FC = (): JSX.Element => {
         settings: { gameOptions, handleSettings },
     } = useContext(AppContext);
 
+    const { amount } = gameOptions;
+
     // contains choices for total number of questions when the game is started
-    const amount: Array<OptionInterface> = [
+    const amountOptions: Array<OptionInterface> = [
         { value: 5, text: "5" },
         { value: 10, text: "10" },
         { value: 25, text: "25" },
@@ -24,45 +26,50 @@ const Intro: React.FC = (): JSX.Element => {
     ];
 
     // difficulty levels for retrieved questions
-    const difficulty: Array<OptionInterface> = Object.values(Difficulty).map(
-        (item) =>
-            Object.assign({
-                value: item,
-                text: `${item.toUpperCase()[0]}${item.substring(1)}`,
-            })
+    const difficultyOptions: Array<OptionInterface> = Object.values(
+        Difficulty
+    ).map((item) =>
+        Object.assign({
+            value: item,
+            text: `${item.toUpperCase()[0]}${item.substring(1)}`,
+        })
     );
 
     // answer types/choice numbers to set for questions
-    const type: Array<OptionInterface> = Object.values(Type).map((item) => {
-        if ([Type.BOOLEAN, Type.MULTIPLE].includes(item)) {
-            if (item === Type.BOOLEAN) {
-                return Object.assign({
-                    value: item,
-                    text: "True / False",
-                });
+    const typeOptions: Array<OptionInterface> = Object.values(Type).map(
+        (item) => {
+            if ([Type.BOOLEAN, Type.MULTIPLE].includes(item)) {
+                if (item === Type.BOOLEAN) {
+                    return Object.assign({
+                        value: item,
+                        text: "True / False",
+                    });
+                }
+
+                if (item === Type.MULTIPLE) {
+                    return Object.assign({
+                        value: item,
+                        text: "Multiple choice",
+                    });
+                }
             }
 
-            if (item === Type.MULTIPLE) {
-                return Object.assign({
-                    value: item,
-                    text: "Multiple choice",
-                });
-            }
+            return Object.assign({
+                value: item,
+                text: `${item.toUpperCase()[0]}${item.substring(1)}`,
+            });
         }
-
-        return Object.assign({
-            value: item,
-            text: `${item.toUpperCase()[0]}${item.substring(1)}`,
-        });
-    });
+    );
 
     // set value for category value which has to be set in the API call
     const categoryStartId: number = 9;
     // categories of questions
-    const category: Array<OptionInterface> = categories.map((item, index) => ({
-        value: categoryStartId + index,
-        text: item,
-    }));
+    const categoryOptions: Array<OptionInterface> = categories.map(
+        (item, index) => ({
+            value: categoryStartId + index,
+            text: item,
+        })
+    );
 
     // handle changes in select elements
     const setSelectValue = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -78,32 +85,35 @@ const Intro: React.FC = (): JSX.Element => {
                     Quizzical
                 </h1>
                 <h2 className="intro__subtitle intro__subtitle--primary">
-                    Test your knowledge with 5 random questions.
+                    {`Test your knowledge with ${amount} random questions.`}
                 </h2>
                 <div className="settings-container">
+                    {/* TODO: change select to an input to select a custom nr of questions */}
                     <Select
                         name="amount"
                         text="Quantity"
-                        options={amount}
+                        options={amountOptions}
                         handleChange={setSelectValue}
                     />
                     <Select
                         name="category"
                         text="Category"
-                        options={category}
+                        options={categoryOptions}
                         handleChange={setSelectValue}
                     />
                     <Select
                         name="difficulty"
                         text="Difficulty"
-                        options={difficulty}
+                        options={difficultyOptions}
                         handleChange={setSelectValue}
                     />
+                    {/* TODO: add true/false type of answers as well */}
                     <Select
                         name="type"
                         text="Type"
-                        options={type}
+                        options={typeOptions}
                         handleChange={setSelectValue}
+                        disabled={true}
                     />
                 </div>
             </div>

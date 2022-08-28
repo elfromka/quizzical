@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Question, Score, Loader, Button } from "../../components";
-import fetchQuestions, { Difficulty, NR_OF_QUESTIONS } from "../../api/api";
+import fetchQuestions from "../../api/api";
+import AppContext from "../../contexts/AppContext";
 import { QuestionObject } from "../../components/Question/Question";
 
 // used in handleTotalUserAnswers and handleScore functions
@@ -15,15 +16,21 @@ export enum Actions {
  * @return {JSX.Element} with questions, 'Check answers' button or Score component
  */
 const Questions: React.FC = (): JSX.Element => {
-    const [playAgain, setPlayAgain] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [playAgain, setPlayAgain] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
     const [questions, setQuestions] = useState<QuestionObject[]>([]);
-    const [totalUserAnswers, setTotalUserAnswers] = useState(0);
-    const [score, setScore] = useState(0);
+    const [totalUserAnswers, setTotalUserAnswers] = useState<number>(0);
+    const [score, setScore] = useState<number>(0);
     const [gameOver, setGameOver] = useState({
         showScoreComponent: false,
         showCheckButton: true,
     });
+
+    const {
+        settings: { gameOptions },
+    } = useContext(AppContext);
+
+    const { amount, difficulty, category, type } = gameOptions;
 
     useEffect(() => {
         // to clean-up the useEffect hook after fetching data from API
@@ -31,8 +38,10 @@ const Questions: React.FC = (): JSX.Element => {
 
         const fetchData = async () => {
             const fetchedQuestions: QuestionObject[] = await fetchQuestions(
-                5,
-                Difficulty.EASY,
+                amount,
+                category,
+                difficulty,
+                type,
                 abortController
             );
 
@@ -112,11 +121,12 @@ const Questions: React.FC = (): JSX.Element => {
         <>
             <section className="questions container">
                 {loading && questions.length === 0 ? (
-                    [...Array(NR_OF_QUESTIONS)].map((currentValue, i) => (
+                    [...Array(Number(amount))].map((currentValue, i) => (
                         <Loader key={`${currentValue}-${i}`} />
                     ))
                 ) : (
                     <>
+                        {console.log(questions)}
                         {questions.map(
                             ({ question, answers, correct_answer }, index) => (
                                 <Question
@@ -145,7 +155,7 @@ const Questions: React.FC = (): JSX.Element => {
                     onClick={handleCheckButtonClick}
                     disabled={
                         (loading && (questions.length === 0 ? true : false)) ||
-                        totalUserAnswers < NR_OF_QUESTIONS
+                        totalUserAnswers < Number(amount)
                     }
                 >
                     Check answers
@@ -154,7 +164,7 @@ const Questions: React.FC = (): JSX.Element => {
             {gameOver.showScoreComponent && (
                 <Score
                     score={score}
-                    totalQuestions={NR_OF_QUESTIONS}
+                    totalQuestions={Number(amount)}
                     handlePlayAgain={handlePlayAgain}
                 />
             )}

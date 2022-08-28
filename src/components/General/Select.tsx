@@ -9,6 +9,7 @@ interface SelectInterface {
     name: string;
     text: string;
     options: Array<OptionInterface>;
+    disabled?: boolean;
     handleChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
@@ -22,6 +23,7 @@ const Select: React.FC<SelectInterface> = ({
     name,
     text,
     options,
+    disabled = false,
     handleChange,
 }: SelectInterface): JSX.Element => (
     <div className="select-wrapper">
@@ -33,6 +35,7 @@ const Select: React.FC<SelectInterface> = ({
             name={name}
             className="select-wrapper__select select"
             onChange={handleChange}
+            disabled={disabled}
         >
             {options.map(({ value, text }) => (
                 <option className="select__option" value={value} key={value}>

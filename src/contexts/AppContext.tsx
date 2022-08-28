@@ -3,7 +3,7 @@ import { useState, createContext } from "react";
 interface AppContextInterface {
     settings: {
         gameOptions: GameOptionsInterface;
-        handleSettings?: (key: string, value: number) => void;
+        handleSettings?: (key: string, value: string) => void;
     };
 }
 
@@ -11,7 +11,7 @@ interface GameOptionsInterface {
     amount: string;
     category: string;
     difficulty: string;
-    type?: string;
+    type: string;
 }
 
 const defaultGameOptions: GameOptionsInterface = {
@@ -36,7 +36,7 @@ export const AppProvider: React.FC<{ children?: React.ReactNode }> = ({
     const [gameOptions, setGameOptions] =
         useState<GameOptionsInterface>(defaultGameOptions);
 
-    const handleSettings = (key: string, value: number | string) => {
+    const handleSettings = (key: string, value: string) => {
         setGameOptions((prevGameOptions) => ({
             ...prevGameOptions,
             [key]: value,

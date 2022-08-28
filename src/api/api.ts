@@ -42,9 +42,6 @@ export const categories: string[] = [
     "Entertainment: Cartoon & Animations",
 ];
 
-// Total number of questions retrieved from the API currently by default
-export const NR_OF_QUESTIONS: number = 5;
-
 /**
  * Retrieve questions from the Open Trivia Database API.
  *
@@ -56,15 +53,13 @@ export const NR_OF_QUESTIONS: number = 5;
  * @return {Promise<Array>} of objects (questions with their answer(s)) or on fail returns an empty array.
  */
 const fetchQuestions = async (
-    amount: number = NR_OF_QUESTIONS,
-    difficulty: Difficulty,
+    amount: string,
+    category: string,
+    difficulty: string,
+    type: string,
     abortController: any
 ): Promise<Array<QuestionObject>> => {
-    const type: string = "multiple";
-    const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=${type}&encode=base64`;
-
-    // TODO: related and disabled code for #1 GitHub issue
-    // const endpoint = `https://opentdb.com/api.php?amount=${amount}&category=${category}&type=${type}&difficulty=${difficulty}&type=multiple&encode=base64`
+    const endpoint = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}&encode=base64`;
 
     try {
         const response = await fetch(endpoint, {
