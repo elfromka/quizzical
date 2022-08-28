@@ -85,7 +85,7 @@ const Intro: React.FC = (): JSX.Element => {
                     Quizzical
                 </h1>
                 <h2 className="intro__subtitle intro__subtitle--primary">
-                    {`Test your knowledge with ${amount} random questions.`}
+                    {`Test your knowledge with ${amount} questions.`}
                 </h2>
                 <div className="settings-container">
                     {/* TODO: change select to an input to select a custom nr of questions */}
