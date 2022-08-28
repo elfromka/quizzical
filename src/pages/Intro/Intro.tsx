@@ -1,4 +1,5 @@
-import { ChangeEvent, useState } from "react";
+import AppContext from "../../contexts/AppContext";
+import { ChangeEvent, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Select } from "../../components";
 import { Difficulty, Type, categories } from "../../api/api";
@@ -10,13 +11,9 @@ import { OptionInterface } from "../../components/General/Select";
  * @return {JSX.Element} with a title and subtitle, start link.
  */
 const Intro: React.FC = (): JSX.Element => {
-    const defaultState = {
-        amount: "5",
-        category: "9",
-        difficulty: "easy",
-        type: "multple",
-    };
-    const [settings, setSettings] = useState(defaultState);
+    const {
+        settings: { gameOptions, handleSettings },
+    } = useContext(AppContext);
 
     // contains choices for total number of questions when the game is started
     const amount: Array<OptionInterface> = [
@@ -34,8 +31,6 @@ const Intro: React.FC = (): JSX.Element => {
                 text: `${item.toUpperCase()[0]}${item.substring(1)}`,
             })
     );
-
-    console.log(settings);
 
     // answer types/choice numbers to set for questions
     const type: Array<OptionInterface> = Object.values(Type).map((item) => {
@@ -73,10 +68,7 @@ const Intro: React.FC = (): JSX.Element => {
     const setSelectValue = (e: ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = e.target;
 
-        setSettings((prevSettings) => ({
-            ...prevSettings,
-            [name]: value,
-        }));
+        handleSettings?.(name, value);
     };
 
     return (
