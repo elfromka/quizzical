@@ -89,7 +89,7 @@ body {
         border-radius: 1rem;
         color: $primaryColor;
         font-size: 1.4rem;
-        padding: 1.4rem 1rem;
+        padding: 1rem;
         transition: $transition-duration;
         cursor: pointer;
 
@@ -332,7 +332,7 @@ body {
 
         &__select.select {
             text-align: left;
-            padding: 1.4rem 1rem;
+            padding: 0.8rem;
         }
 
         & + .select-wrapper {
