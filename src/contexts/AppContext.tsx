@@ -50,8 +50,6 @@ export const AppProvider: React.FC<{ children?: React.ReactNode }> = ({
         },
     };
 
-    console.log(value);
-
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 

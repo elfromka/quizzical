@@ -126,7 +126,6 @@ const Questions: React.FC = (): JSX.Element => {
                     ))
                 ) : (
                     <>
-                        {console.log(questions)}
                         {questions.map(
                             ({ question, answers, correct_answer }, index) => (
                                 <Question
