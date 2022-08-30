@@ -141,6 +141,7 @@ const Questions: React.FC = (): JSX.Element => {
                                 />
                             )
                         )}
+                        {console.log(questions)}
                     </>
                 )}
                 <p className="questions__info">

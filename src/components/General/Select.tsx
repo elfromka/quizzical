@@ -7,7 +7,7 @@ export interface OptionInterface {
 
 interface SelectInterface {
     name: string;
-    text: string;
+    label: string;
     options: Array<OptionInterface>;
     disabled?: boolean;
     handleChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
@@ -21,14 +21,14 @@ interface SelectInterface {
  */
 const Select: React.FC<SelectInterface> = ({
     name,
-    text,
+    label,
     options,
     disabled = false,
     handleChange,
 }: SelectInterface): JSX.Element => (
     <div className="select-wrapper">
         <label htmlFor={name} className="select-wrapper__label">
-            {text}
+            {label}
         </label>
         <select
             id={name}
