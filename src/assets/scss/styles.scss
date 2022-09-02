@@ -266,6 +266,7 @@ body {
 .questions__info {
     margin-bottom: 3rem;
     font-size: 1.2rem;
+    line-height: 2.4rem;
 
     &:before {
         content: "i";
@@ -387,5 +388,9 @@ body {
     .intro .settings-container {
         display: flex;
         margin: 4rem auto;
+    }
+
+    .questions__info {
+        line-height: initial;
     }
 }

@@ -149,7 +149,6 @@ const Intro: React.FC = (): JSX.Element => {
                         label="Type"
                         options={typeOptions}
                         handleChange={setSelectValue}
-                        disabled={true}
                     />
                 </div>
             </div>
