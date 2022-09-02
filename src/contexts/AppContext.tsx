@@ -16,7 +16,7 @@ interface GameOptionsInterface {
 
 const defaultGameOptions: GameOptionsInterface = {
     amount: "5",
-    category: "9",
+    category: "",
     difficulty: "easy",
     type: "multiple",
 };

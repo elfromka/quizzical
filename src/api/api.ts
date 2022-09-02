@@ -59,7 +59,11 @@ const fetchQuestions = async (
     type: string,
     abortController: any
 ): Promise<Array<QuestionObject>> => {
-    const endpoint = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}&encode=base64`;
+    let endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=${type}&encode=base64`;
+
+    if (category) {
+        endpoint = `${endpoint}&category=${category}`;
+    }
 
     try {
         const response = await fetch(endpoint, {

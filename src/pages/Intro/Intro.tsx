@@ -63,6 +63,12 @@ const Intro: React.FC = (): JSX.Element => {
         })
     );
 
+    // adding "Any Category" to options as well to get questions from any category
+    categoryOptions.unshift({
+        value: "",
+        text: "Any Category",
+    });
+
     // handle changes on select element values
     const setSelectValue = (
         e: ChangeEvent<HTMLSelectElement | HTMLInputElement>
@@ -102,6 +108,8 @@ const Intro: React.FC = (): JSX.Element => {
         handleSettings?.(name, verifiedValue);
     };
 
+    // TODO: get max number of questions of a certain category to prevent problems while fetching questions from the API
+    // from this endpoint: https://opentdb.com/api_count.php?category=CATEGORY_ID_HERE
     return (
         <section className="intro container">
             <div>
