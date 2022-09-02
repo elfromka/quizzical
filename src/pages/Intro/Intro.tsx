@@ -63,13 +63,43 @@ const Intro: React.FC = (): JSX.Element => {
         })
     );
 
-    // handle changes in input/select elements
+    // handle changes on select element values
     const setSelectValue = (
         e: ChangeEvent<HTMLSelectElement | HTMLInputElement>
     ) => {
         const { name, value } = e.target;
 
         handleSettings?.(name, value);
+    };
+
+    // handle changes on input element values
+    const setInputValue = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value, type } = e.target;
+        let verifiedValue = value;
+
+        // prevent empty value of input and/or values out of min max boundary
+        // check for number type inputs
+        if (type === "number") {
+            const { min, max } = e.target;
+
+            // if the value is empty then a default value should be set (0)
+            if (value === "") {
+                verifiedValue = "0";
+            }
+
+            if (min && max) {
+                // set min and/or max values based on the value filled in the input
+                if (parseInt(value) < parseInt(min)) verifiedValue = min;
+                if (parseInt(value) > parseInt(max)) verifiedValue = max;
+
+                // if the input is empty, set the min value by default
+                if (value === "") {
+                    verifiedValue = min;
+                }
+            }
+        }
+
+        handleSettings?.(name, verifiedValue);
     };
 
     return (
@@ -79,7 +109,9 @@ const Intro: React.FC = (): JSX.Element => {
                     Quizzical
                 </h1>
                 <h2 className="intro__subtitle intro__subtitle--primary">
-                    {`Test your knowledge with ${amount} questions.`}
+                    {`Test your knowledge with ${amount} ${
+                        parseInt(amount) > 1 ? "questions" : "question"
+                    }.`}
                 </h2>
                 <div className="settings-container">
                     <Input
@@ -87,7 +119,7 @@ const Intro: React.FC = (): JSX.Element => {
                         label="Quantity"
                         type="number"
                         value={amount}
-                        handleChange={setSelectValue}
+                        handleChange={setInputValue}
                         min="1"
                         max="50"
                     />

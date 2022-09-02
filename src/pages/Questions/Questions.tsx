@@ -3,6 +3,7 @@ import { Question, Score, Loader, Button } from "../../components";
 import fetchQuestions from "../../api/api";
 import AppContext from "../../contexts/AppContext";
 import { QuestionObject } from "../../components/Question/Question";
+import { Navigate } from "react-router-dom";
 
 // used in handleTotalUserAnswers and handleScore functions
 export enum Actions {
@@ -18,6 +19,7 @@ export enum Actions {
 const Questions: React.FC = (): JSX.Element => {
     const [playAgain, setPlayAgain] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<boolean>(false);
     const [questions, setQuestions] = useState<QuestionObject[]>([]);
     const [totalUserAnswers, setTotalUserAnswers] = useState<number>(0);
     const [score, setScore] = useState<number>(0);
@@ -37,16 +39,24 @@ const Questions: React.FC = (): JSX.Element => {
         const abortController = new AbortController();
 
         const fetchData = async () => {
-            const fetchedQuestions: QuestionObject[] = await fetchQuestions(
-                amount,
-                category,
-                difficulty,
-                type,
-                abortController
-            );
+            try {
+                const fetchedQuestions: QuestionObject[] = await fetchQuestions(
+                    amount,
+                    category,
+                    difficulty,
+                    type,
+                    abortController
+                );
 
-            setQuestions(fetchedQuestions);
-            setLoading(false);
+                setQuestions(fetchedQuestions);
+                if (!fetchedQuestions) {
+                    setLoading(false);
+                }
+            } catch (e) {
+                if (e) {
+                    setError(true);
+                }
+            }
         };
 
         fetchData();
@@ -120,6 +130,10 @@ const Questions: React.FC = (): JSX.Element => {
     return (
         <>
             <section className="questions container">
+                {/* TODO: display error message on Intro page */}
+                {loading && questions.length === 0 && error && (
+                    <Navigate to={"/"} />
+                )}
                 {loading && questions.length === 0 ? (
                     [...Array(Number(amount))].map((currentValue, i) => (
                         <Loader key={`${currentValue}-${i}`} />
@@ -141,7 +155,6 @@ const Questions: React.FC = (): JSX.Element => {
                                 />
                             )
                         )}
-                        {console.log(questions)}
                     </>
                 )}
                 <p className="questions__info">

@@ -72,27 +72,23 @@ const Question: React.FC<Props> = ({
     };
 
     return (
-        <>
-            <div className="question">
-                <h2 className="question__title question__title--primary">
-                    {text}
-                </h2>
-                <div className="answers">
-                    {answers.map((answer, index) => (
-                        <Answer
-                            key={index}
-                            text={answer}
-                            correctAnswer={correct_answer}
-                            selectAnswer={handleSelect}
-                            selectedCount={selectedCount}
-                            showResults={showResults}
-                            handleScore={handleScore}
-                        />
-                    ))}
-                </div>
-                <hr className="separator" />
+        <div className="question">
+            <h2 className="question__title question__title--primary">{text}</h2>
+            <div className="answers">
+                {answers.map((answer, index) => (
+                    <Answer
+                        key={index}
+                        text={answer}
+                        correctAnswer={correct_answer}
+                        selectAnswer={handleSelect}
+                        selectedCount={selectedCount}
+                        showResults={showResults}
+                        handleScore={handleScore}
+                    />
+                ))}
             </div>
-        </>
+            <hr className="separator" />
+        </div>
     );
 };
 

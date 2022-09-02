@@ -72,6 +72,13 @@ const fetchQuestions = async (
 
         const originalData = await response.json();
 
+        // no questions can be returned with the criteria set by the visitor
+        if (originalData.response_code === 1) {
+            throw new Error(
+                "Failed to get questions with these specifications. Please, try to modify them."
+            );
+        }
+
         // decoding base64 encoded values of questions - solves issue with quote marks, etc.
         const dataEncoded = [...originalData.results];
         const dataDecoded = dataEncoded.map((questionObj) =>
@@ -87,9 +94,12 @@ const fetchQuestions = async (
         }));
     } catch (error: unknown) {
         if (error instanceof Error) {
-            throw new Error(
-                `Failed on fetching questions. Message: ${error.message}`
-            );
+            // don't take in consideration this first error message (appears only in dev mode)
+            if (error.message !== "The user aborted a request.") {
+                throw new Error(
+                    `Failed on fetching questions. Message: ${error.message}`
+                );
+            }
         }
     }
 
