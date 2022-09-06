@@ -11,6 +11,7 @@ interface SelectInterface {
     options: Array<OptionInterface>;
     disabled?: boolean;
     handleChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
+    isLoading?: boolean;
 }
 
 /**
@@ -25,6 +26,7 @@ const Select: React.FC<SelectInterface> = ({
     options,
     disabled = false,
     handleChange,
+    isLoading = false,
 }: SelectInterface): JSX.Element => (
     <div className="select-wrapper">
         <label htmlFor={name} className="select-wrapper__label">
@@ -35,13 +37,22 @@ const Select: React.FC<SelectInterface> = ({
             name={name}
             className="select-wrapper__select select"
             onChange={handleChange}
-            disabled={disabled}
+            disabled={disabled || isLoading}
         >
-            {options.map(({ value, text }) => (
-                <option className="select__option" value={value} key={value}>
-                    {text}
-                </option>
-            ))}
+            {isLoading && options.length === 0 && (
+                <option className="select__option">Loading...</option>
+            )}
+            {!isLoading &&
+                options.length > 0 &&
+                options.map(({ value, text }) => (
+                    <option
+                        className="select__option"
+                        value={value}
+                        key={value}
+                    >
+                        {text}
+                    </option>
+                ))}
         </select>
     </div>
 );

@@ -1,9 +1,14 @@
-import AppContext from "../../contexts/AppContext";
-import { ChangeEvent, useContext } from "react";
+import { useState, useEffect, ChangeEvent, useContext } from "react";
 import { Link } from "react-router-dom";
+import AppContext from "../../contexts/AppContext";
 import { Input, Select } from "../../components";
-import { Difficulty, Type, categories } from "../../api/api";
 import { OptionInterface } from "../../components/General/Select";
+import {
+    Difficulty,
+    Type,
+    fetchCategories,
+    CategoryInterface,
+} from "../../api/api";
 
 /**
  * First (intro) page of the application from where the quiz questions loads.
@@ -11,11 +16,45 @@ import { OptionInterface } from "../../components/General/Select";
  * @return {JSX.Element} with a title and subtitle, start link.
  */
 const Intro: React.FC = (): JSX.Element => {
+    const [loadingCategories, setLoadingCategories] = useState<boolean>(true);
+    const [categoryOptions, setCategoryOptions] = useState<CategoryInterface[]>(
+        []
+    );
+
+    useEffect(() => {
+        // to clean-up the useEffect hook after fetching data from API
+        const abortController = new AbortController();
+
+        const fetchDataCategories = async () => {
+            try {
+                const fetchedCategories: CategoryInterface[] =
+                    await fetchCategories(abortController);
+
+                setCategoryOptions(fetchedCategories);
+
+                if (fetchedCategories.length > 0) {
+                    setLoadingCategories(false);
+                }
+            } catch (error: any) {
+                if (error instanceof Error) {
+                    throw new Error(
+                        `Failed on fetching categories. Message: ${error.message}`
+                    );
+                }
+            }
+        };
+
+        fetchDataCategories();
+
+        // this will cancel the fetch request when the effect is unmounted
+        return () => abortController.abort();
+    }, []);
+
     const {
         settings: { gameOptions, handleSettings },
     } = useContext(AppContext);
 
-    const { amount } = gameOptions;
+    const { amount }: { amount: string } = gameOptions;
 
     // difficulty levels for retrieved questions
     const difficultyOptions: Array<OptionInterface> = Object.values(
@@ -52,22 +91,6 @@ const Intro: React.FC = (): JSX.Element => {
             });
         }
     );
-
-    // set value for category value which has to be set in the API call
-    const categoryStartId: number = 9;
-    // categories of questions
-    const categoryOptions: Array<OptionInterface> = categories.map(
-        (item, index) => ({
-            value: categoryStartId + index,
-            text: item,
-        })
-    );
-
-    // adding "Any Category" to options as well to get questions from any category
-    categoryOptions.unshift({
-        value: "",
-        text: "Any Category",
-    });
 
     // handle changes on select element values
     const setSelectValue = (
@@ -136,6 +159,7 @@ const Intro: React.FC = (): JSX.Element => {
                         label="Category"
                         options={categoryOptions}
                         handleChange={setSelectValue}
+                        isLoading={loadingCategories}
                     />
                     <Select
                         name="difficulty"
@@ -143,7 +167,6 @@ const Intro: React.FC = (): JSX.Element => {
                         options={difficultyOptions}
                         handleChange={setSelectValue}
                     />
-                    {/* TODO: add true/false type of answers as well */}
                     <Select
                         name="type"
                         label="Type"

@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { Question, Score, Loader, Button } from "../../components";
-import fetchQuestions from "../../api/api";
+import { fetchQuestions } from "../../api/api";
 import AppContext from "../../contexts/AppContext";
 import { QuestionObject } from "../../components/Question/Question";
 import { Navigate } from "react-router-dom";
@@ -49,12 +49,20 @@ const Questions: React.FC = (): JSX.Element => {
                 );
 
                 setQuestions(fetchedQuestions);
-                if (!fetchedQuestions) {
+
+                if (fetchedQuestions.length > 0) {
                     setLoading(false);
                 }
-            } catch (e) {
-                if (e) {
-                    setError(true);
+            } catch (error: any) {
+                if (error instanceof Error) {
+                    // don't take in consideration this first error message (appears only in dev mode)
+                    if (error.message !== "The user aborted a request.") {
+                        setError(true);
+
+                        throw new Error(
+                            `Failed on fetching questions. Message: ${error.message}`
+                        );
+                    }
                 }
             }
         };
@@ -136,7 +144,7 @@ const Questions: React.FC = (): JSX.Element => {
                 )}
                 {loading && questions.length === 0 ? (
                     [...Array(Number(amount))].map((currentValue, i) => (
-                        <Loader key={`${currentValue}-${i}`} />
+                        <Loader key={`${currentValue}-${i}`} type={type} />
                     ))
                 ) : (
                     <>

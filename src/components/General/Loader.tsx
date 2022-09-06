@@ -1,11 +1,15 @@
 import ContentLoader from "react-content-loader";
 
+interface LoaderInterface {
+    type: string;
+}
+
 /**
  * Generates an SVG loader for a single question in the Questions page.
  *
  * @return {JSX.Element} for the question, its' answers and a separator.
  */
-const Loader: React.FC = (): JSX.Element => (
+const Loader: React.FC<LoaderInterface> = ({ type }): JSX.Element => (
     <>
         <ContentLoader
             speed={2}
@@ -17,10 +21,40 @@ const Loader: React.FC = (): JSX.Element => (
         >
             <rect x="0" y="7" rx="3" ry="3" width="100%" height="18" />
             <rect x="0" y="34" rx="3" ry="3" width="300" height="18" />
-            <rect x="0" y="64" rx="3" ry="3" width="100" height="23" />
-            <rect x="115" y="64" rx="3" ry="3" width="100" height="23" />
-            <rect x="230" y="64" rx="3" ry="3" width="100" height="23" />
-            <rect x="345" y="64" rx="3" ry="3" width="100" height="23" />
+            {type === "boolean" ? (
+                <>
+                    <rect x="0" y="64" rx="3" ry="3" width="50" height="23" />
+                    <rect x="70" y="64" rx="3" ry="3" width="50" height="23" />
+                </>
+            ) : (
+                <>
+                    <rect x="0" y="64" rx="3" ry="3" width="100" height="23" />
+                    <rect
+                        x="115"
+                        y="64"
+                        rx="3"
+                        ry="3"
+                        width="100"
+                        height="23"
+                    />
+                    <rect
+                        x="230"
+                        y="64"
+                        rx="3"
+                        ry="3"
+                        width="100"
+                        height="23"
+                    />
+                    <rect
+                        x="345"
+                        y="64"
+                        rx="3"
+                        ry="3"
+                        width="100"
+                        height="23"
+                    />
+                </>
+            )}
         </ContentLoader>
 
         <hr className="separator" />

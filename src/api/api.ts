@@ -42,6 +42,84 @@ export const categories: string[] = [
     "Entertainment: Cartoon & Animations",
 ];
 
+// TODO: save retrieved dropdown/select data from the API on the Intro page in localStorage and load them from localStorage for short time period.
+// TODO: retrieve number of questions per categories
+// interface Category {
+//     category_id: number;
+//     category_question_count: {
+//         total_question_count: number;
+//         total_easy_question_count: number;
+//         total_medium_question_count: number;
+//         total_hard_question_count: number;
+//     };
+// }
+
+interface ApiCategoryInterface {
+    id: number;
+    name: string;
+}
+
+export interface CategoryInterface {
+    value: number;
+    text: string;
+}
+
+/**
+ * Retrieve all the categories of questions from the Open Trivia Database API.
+ *
+ * @async
+ *
+ * @param {any} abortController - controller object that allows to abort one or more DOM requests as and when desired.
+ *
+ * @return {Promise<Array>} of objects (categories: id - name) or on fail returns an empty array.
+ */
+const fetchCategories = async (
+    abortController: any
+): Promise<CategoryInterface[]> => {
+    const ENDPOINT = `/api_category.php`;
+
+    try {
+        const response = await fetch(ENDPOINT, {
+            signal: abortController.signal,
+        });
+
+        if (response.status !== 200) {
+            throw new Error("No response. Check the APIs' status.");
+        }
+
+        const {
+            trivia_categories,
+        }: { trivia_categories: ApiCategoryInterface[] } =
+            await response.json();
+
+        const categories: CategoryInterface[] = trivia_categories.map(
+            ({ id, name }: { id: number; name: string }) => ({
+                value: id,
+                text: name,
+            })
+        );
+
+        // adding "Any Category" to options as well to get questions from any category
+        categories.unshift({
+            value: 0,
+            text: "Any Category",
+        });
+
+        return categories;
+    } catch (error: any) {
+        if (error instanceof Error) {
+            // don't take in consideration this first error message (appears only in dev mode)
+            if (error.message !== "The user aborted a request.") {
+                throw new Error(
+                    `Failed on fetching categories. Message: ${error.message}`
+                );
+            }
+        }
+    }
+
+    return [];
+};
+
 /**
  * Retrieve questions from the Open Trivia Database API.
  *
@@ -59,7 +137,7 @@ const fetchQuestions = async (
     type: string,
     abortController: any
 ): Promise<Array<QuestionObject>> => {
-    let endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=${type}&encode=base64`;
+    let endpoint = `/api.php?amount=${amount}&difficulty=${difficulty}&type=${type}&encode=base64`;
 
     if (category) {
         endpoint = `${endpoint}&category=${category}`;
@@ -89,6 +167,19 @@ const fetchQuestions = async (
             decodeObjectValues(questionObj)
         );
 
+        if (type === "boolean") {
+            // if the type is boolean then display True before False
+            return dataDecoded.map((question: any) => ({
+                ...question,
+                answers: [
+                    ...question.incorrect_answers,
+                    question.correct_answer,
+                ]
+                    .sort()
+                    .reverse(),
+            }));
+        }
+
         return dataDecoded.map((question: any) => ({
             ...question,
             answers: randomizeArrayStrings([
@@ -96,7 +187,7 @@ const fetchQuestions = async (
                 question.correct_answer,
             ]),
         }));
-    } catch (error: unknown) {
+    } catch (error: any) {
         if (error instanceof Error) {
             // don't take in consideration this first error message (appears only in dev mode)
             if (error.message !== "The user aborted a request.") {
@@ -110,4 +201,4 @@ const fetchQuestions = async (
     return [];
 };
 
-export default fetchQuestions;
+export { fetchQuestions, fetchCategories };
