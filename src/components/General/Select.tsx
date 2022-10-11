@@ -1,9 +1,5 @@
 import { ChangeEvent } from "react";
-
-export interface OptionInterface {
-    value: string | number;
-    text: string;
-}
+import { OptionInterface } from "./../../api/api";
 
 interface SelectInterface {
     name: string;

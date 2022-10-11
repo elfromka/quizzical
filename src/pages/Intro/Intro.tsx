@@ -2,13 +2,13 @@ import { useState, useEffect, ChangeEvent, useContext } from "react";
 import { Link } from "react-router-dom";
 import AppContext from "../../contexts/AppContext";
 import { Input, Select } from "../../components";
-import { OptionInterface } from "../../components/General/Select";
 import {
     Difficulty,
     Type,
     fetchCategories,
-    CategoryInterface,
+    OptionInterface,
 } from "../../api/api";
+import { useSessionStorage } from "../../hooks";
 
 /**
  * First (intro) page of the application from where the quiz questions loads.
@@ -17,9 +17,8 @@ import {
  */
 const Intro: React.FC = (): JSX.Element => {
     const [loadingCategories, setLoadingCategories] = useState<boolean>(true);
-    const [categoryOptions, setCategoryOptions] = useState<CategoryInterface[]>(
-        []
-    );
+    const [categoryOptions, setCategoryOptions] =
+        useSessionStorage("categories");
 
     useEffect(() => {
         // to clean-up the useEffect hook after fetching data from API
@@ -27,7 +26,7 @@ const Intro: React.FC = (): JSX.Element => {
 
         const fetchDataCategories = async () => {
             try {
-                const fetchedCategories: CategoryInterface[] =
+                const fetchedCategories: OptionInterface[] =
                     await fetchCategories(abortController);
 
                 setCategoryOptions(fetchedCategories);
@@ -44,7 +43,11 @@ const Intro: React.FC = (): JSX.Element => {
             }
         };
 
-        fetchDataCategories();
+        if (categoryOptions.length === 0) {
+            fetchDataCategories();
+        } else {
+            setLoadingCategories(false);
+        }
 
         // this will cancel the fetch request when the effect is unmounted
         return () => abortController.abort();
@@ -131,8 +134,6 @@ const Intro: React.FC = (): JSX.Element => {
         handleSettings?.(name, verifiedValue);
     };
 
-    // TODO: get max number of questions of a certain category to prevent problems while fetching questions from the API
-    // from this endpoint: https://opentdb.com/api_count.php?category=CATEGORY_ID_HERE
     return (
         <section className="intro container">
             <div>

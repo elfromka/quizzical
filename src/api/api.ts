@@ -14,36 +14,9 @@ export enum Type {
     BOOLEAN = "boolean",
 }
 
-// Retrieve questions in a certain category
-export const categories: string[] = [
-    "General Knowledge",
-    "Entertainment: Books",
-    "Entertainment: Film",
-    "Entertainment: Music",
-    "Entertainment: Musicals & Theatres",
-    "Entertainment: Television",
-    "Entertainment: Video Games",
-    "Entertainment: Board Games",
-    "Science & Nature",
-    "Science: Computers",
-    "Science: Mathematics",
-    "Mythology",
-    "Sports",
-    "Geography",
-    "History",
-    "Politics",
-    "Art",
-    "Celebrities",
-    "Animals",
-    "Vehicles",
-    "Entertainment: Comics",
-    "Science: Gadgets",
-    "Entertainment: Japanese Anime & Manga",
-    "Entertainment: Cartoon & Animations",
-];
-
-// TODO: save retrieved dropdown/select data from the API on the Intro page in localStorage and load them from localStorage for short time period.
 // TODO: retrieve number of questions per categories
+// get max number of questions of a certain category to prevent problems while fetching questions from the API
+// from this endpoint: https://opentdb.com/api_count.php?category=CATEGORY_ID_HERE
 // interface Category {
 //     category_id: number;
 //     category_question_count: {
@@ -54,13 +27,13 @@ export const categories: string[] = [
 //     };
 // }
 
-interface ApiCategoryInterface {
+interface ApiOptionInterface {
     id: number;
     name: string;
 }
 
-export interface CategoryInterface {
-    value: number;
+export interface OptionInterface {
+    value: string | number;
     text: string;
 }
 
@@ -75,7 +48,7 @@ export interface CategoryInterface {
  */
 const fetchCategories = async (
     abortController: any
-): Promise<CategoryInterface[]> => {
+): Promise<OptionInterface[]> => {
     const ENDPOINT = `/api_category.php`;
 
     try {
@@ -89,10 +62,9 @@ const fetchCategories = async (
 
         const {
             trivia_categories,
-        }: { trivia_categories: ApiCategoryInterface[] } =
-            await response.json();
+        }: { trivia_categories: ApiOptionInterface[] } = await response.json();
 
-        const categories: CategoryInterface[] = trivia_categories.map(
+        const categories: OptionInterface[] = trivia_categories.map(
             ({ id, name }: { id: number; name: string }) => ({
                 value: id,
                 text: name,
