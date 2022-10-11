@@ -3,6 +3,7 @@
 // General components
 export { default as Button } from "./General/Button";
 export { default as Select } from "./General/Select";
+export { default as Input } from "./General/Input";
 export { default as Loader } from "./General/Loader";
 
 // Question component

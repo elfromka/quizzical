@@ -73,6 +73,57 @@ body {
     }
 }
 
+.input-wrapper {
+    margin-bottom: 2.4rem;
+
+    &__label {
+        display: block;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+
+    &__input.input {
+        text-align: center;
+        width: 100%;
+        border: 1px solid $primaryColor;
+        border-radius: 1rem;
+        color: $primaryColor;
+        font-size: 1.4rem;
+        padding: 1rem;
+        transition: $transition-duration;
+
+        &:hover {
+            background-color: darken($backgroundColor, 5%);
+        }
+    }
+}
+
+.select-wrapper {
+    margin-bottom: 2.4rem;
+
+    &__label {
+        display: block;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+
+    &__select.select {
+        text-align: center;
+        width: 100%;
+        border: 1px solid $primaryColor;
+        border-radius: 1rem;
+        color: $primaryColor;
+        font-size: 1.4rem;
+        padding: 1rem;
+        transition: $transition-duration;
+        cursor: pointer;
+
+        &:hover {
+            background-color: darken($backgroundColor, 5%);
+        }
+    }
+}
+
 .btn {
     border: 0;
     background: unset;
@@ -183,6 +234,7 @@ body {
 // 1. Intro
 .intro {
     text-align: center;
+    max-width: 768px;
 
     &__title {
         font-size: 3.2rem;
@@ -204,12 +256,17 @@ body {
             color: $primaryColor;
         }
     }
+
+    .settings-container {
+        margin-bottom: 4rem;
+    }
 }
 
 // 2. Questions
 .questions__info {
     margin-bottom: 3rem;
     font-size: 1.2rem;
+    line-height: 2.4rem;
 
     &:before {
         content: "i";
@@ -286,5 +343,54 @@ body {
         &--primary {
             color: $primaryColor;
         }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .select-wrapper {
+        margin-bottom: 1rem;
+
+        &__label {
+            display: block;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        &__select.select {
+            text-align: left;
+            padding: 0.8rem;
+        }
+
+        & + .select-wrapper {
+            margin-left: 1.4rem;
+        }
+    }
+
+    .input-wrapper {
+        margin-bottom: 1rem;
+
+        &__label {
+            display: block;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        &__select.select {
+            text-align: left;
+            padding: 0.8rem;
+        }
+
+        & + .select-wrapper {
+            margin-left: 1.4rem;
+        }
+    }
+
+    .intro .settings-container {
+        display: flex;
+        margin: 4rem auto;
+    }
+
+    .questions__info {
+        line-height: initial;
     }
 }
