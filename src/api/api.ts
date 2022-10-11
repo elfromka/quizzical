@@ -49,7 +49,7 @@ export interface OptionInterface {
 const fetchCategories = async (
     abortController: any
 ): Promise<OptionInterface[]> => {
-    const ENDPOINT = `/api_category.php`;
+    const ENDPOINT = `https://opentdb.com/api_category.php`;
 
     try {
         const response = await fetch(ENDPOINT, {
@@ -109,7 +109,7 @@ const fetchQuestions = async (
     type: string,
     abortController: any
 ): Promise<Array<QuestionObject>> => {
-    let endpoint = `/api.php?amount=${amount}&difficulty=${difficulty}&type=${type}&encode=base64`;
+    let endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=${type}&encode=base64`;
 
     if (category) {
         endpoint = `${endpoint}&category=${category}`;
