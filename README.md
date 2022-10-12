@@ -38,4 +38,3 @@ Solo and final project from Scrimbas' <a href="https://scrimba.com/learn/learnre
 ## Some features/updates to add later on:
 - [ ] add dark mode
 - [ ] re-check logic of some components (Question, Questions, etc.) and apply "Separation of concern": https://felixgerschau.com/react-hooks-separation-of-concerns/
-- [ ] add Context API
