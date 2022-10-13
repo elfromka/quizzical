@@ -97,6 +97,8 @@ const Answer = ({
      * points if the selected answer is the correct answer.
      */
     const handleClick = (): void => {
+        if (selectedCount === 1 && !applySelected) return;
+
         if (selectedCount === 0 || applySelected) {
             setApplySelected((prev) => !prev);
             selectAnswer();
