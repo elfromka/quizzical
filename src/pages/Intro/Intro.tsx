@@ -8,7 +8,7 @@ import {
     fetchCategories,
     OptionInterface,
 } from "../../api/api";
-import { useSessionStorage } from "../../hooks";
+import { useLocalStorage } from "../../hooks";
 
 /**
  * First (intro) page of the application from where the quiz questions loads.
@@ -17,8 +17,7 @@ import { useSessionStorage } from "../../hooks";
  */
 const Intro: React.FC = (): JSX.Element => {
     const [loadingCategories, setLoadingCategories] = useState<boolean>(true);
-    const [categoryOptions, setCategoryOptions] =
-        useSessionStorage("categories");
+    const [categoryOptions, setCategoryOptions] = useLocalStorage("categories");
 
     useEffect(() => {
         // to clean-up the useEffect hook after fetching data from API

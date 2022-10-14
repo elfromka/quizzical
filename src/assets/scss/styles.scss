@@ -280,6 +280,10 @@ body {
 }
 
 .question {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
     &__title {
         font-family: $secondaryFont;
         font-size: 1.6rem;
